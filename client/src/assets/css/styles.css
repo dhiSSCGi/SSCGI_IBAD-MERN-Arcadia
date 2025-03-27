@@ -1,0 +1,173 @@
+/* Section hero */
+.section-hero {
+  background-color: #e5f7dd;
+  padding: 4.8rem 0 8rem 0;
+}
+
+.hero {
+  max-width: 130rem;
+  margin: 0 auto;
+  padding: 0 3.2rem;
+  align-items: center;
+}
+
+.hero-description {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+/* section impact */
+.section-impact {
+  padding: 3.6rem 0;
+}
+
+.impact-description {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.impact-img-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.impact-img {
+  height: 15rem;
+  width: 100%;
+}
+
+/* section key */
+.section-key {
+  background-color: #e5f7dd;
+  padding: 4.8rem 0 3.2rem 0;
+}
+
+.key-header {
+  display: flex;
+  align-items: center;
+}
+.key-icon {
+  color: #94d82d;
+  height: 3.2rem;
+  width: 3.2rem;
+  background-color: #708495;
+  padding: 1.6rem;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.key-title {
+  color: #333;
+  font-weight: 700;
+
+  font-size: 1.2rem;
+}
+
+.key-text {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.key-icon {
+  color: #3f6d2c;
+  height: 1rem;
+  width: 1rem;
+  background-color: #bfecab;
+  padding: 1rem;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* section focus */
+.section-focus {
+  padding: 4.8rem 0 3.2rem 0;
+}
+
+.focus-card {
+  background: rgba(256, 256, 256, 0.75);
+  background: linear-gradient(45deg, #7ed957, #ffffff);
+  margin: 5px;
+}
+
+.focus-img-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.focus-img {
+  height: 15rem;
+}
+.focus-text-box {
+  padding: 1.2rem;
+}
+.focus-description {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.focus-card {
+  background: rgba(256, 256, 256, 0.75);
+  background: linear-gradient(45deg, #7ed957, #ffffff);
+  padding: 1rem;
+}
+
+/* about */
+
+.section-about {
+  padding: 4.8rem 0 3.2rem 0;
+  background-color: #e5f7dd;
+}
+
+.about-text {
+  font-weight: 700;
+}
+
+.highlight-title {
+  font-weight: 700;
+
+  color: #3f6d2c;
+}
+
+.about-paragraphs {
+  font-size: 1.2rem;
+}
+
+/* events */
+.section-main-events {
+  padding: 3.2rem 0 3.2rem 0;
+  background-color: #e5f7dd;
+}
+
+.section-events {
+  padding: 3.2rem 0 3.2rem 0;
+}
+
+.event-card {
+  background: rgba(256, 256, 256, 0.75);
+  background: linear-gradient(45deg, #7ed957, #ffffff);
+  padding: 1rem;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
+}
+
+/* upcoming events */
+.section-upcoming {
+  padding: 3.2rem 0 3.2rem 0;
+  background-color: #e5f7dd;
+}
+
+/* previous events */
+
+.section-previous {
+  padding: 3.2rem 0 3.2rem 0;
+}
