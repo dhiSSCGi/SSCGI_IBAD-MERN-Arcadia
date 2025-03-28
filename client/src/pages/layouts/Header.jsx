@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <>
       <Navbar collapseOnSelect expand="sm" className="nav-bg">
-        <Container>
+        <Container className="nav-container">
           <div className="d-flex align-items-center">
             <Navbar.Brand href="/">
               <img
@@ -25,7 +25,7 @@ const Header = () => {
             id="responsive-navbar-nav"
             className="justify-content-end"
           >
-            <Nav>
+            <Nav className="d-flex align-items-center gap-3">
               <Nav.Link href="/" className="text-white">
                 Who We Are
               </Nav.Link>
@@ -35,8 +35,8 @@ const Header = () => {
               <Nav.Link href="/publications" className="text-white">
                 Publications
               </Nav.Link>
-              <Nav.Link href="/indicators" className="text-white">
-                Indicators
+              <Nav.Link href="/indicators" className="btn login-btn">
+                Login
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>

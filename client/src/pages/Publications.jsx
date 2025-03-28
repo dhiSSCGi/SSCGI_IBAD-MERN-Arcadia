@@ -69,9 +69,9 @@ const Publications = () => {
             <div className="col-md-6">
               <div className="impact-img-box">
                 <img
-                  src="../../assets/images/DeepDive_img.png"
+                  src="../../assets/images/market-analysis.png"
                   className="impact-img"
-                  alt="Deep Dive event"
+                  alt="market-analysis"
                 />
               </div>
             </div>
@@ -80,9 +80,9 @@ const Publications = () => {
             <div className="col-md-6">
               <div className="impact-img-box">
                 <img
-                  src="../../assets/images/workshop-img.png"
+                  src="../../assets/images/position-papers.png"
                   className="impact-img"
-                  alt="Work Shop event"
+                  alt="position-papers"
                 />
               </div>
             </div>
@@ -130,9 +130,9 @@ const Publications = () => {
             <div className="col-md-6">
               <div className="impact-img-box">
                 <img
-                  src="../../assets/images/DeepDive_img.png"
+                  src="../../assets/images/waste-report.png"
                   className="impact-img"
-                  alt="Deep Dive event"
+                  alt="waste-report"
                 />
               </div>
             </div>
@@ -150,8 +150,8 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/event4.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
@@ -169,8 +169,8 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/editorials2.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
@@ -188,16 +188,16 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/editorials3.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
 
                 <div className="focus-text-box">
-                  <h5 className="">FOOD FORWARD</h5>
+                  <h5 className="">TECHCYCLE</h5>
                   <p className="focus-description">
-                    From Food Waste to Resource
+                    Closing the Loop on E-Waste
                   </p>
                 </div>
                 <Button className="btn sub-btn">View</Button>
@@ -216,8 +216,8 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/waste-report1.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
@@ -235,8 +235,8 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/waste-report2.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
@@ -254,16 +254,16 @@ const Publications = () => {
               <div className="card focus-card">
                 <div className="focus-img-box">
                   <img
-                    src="../../assets/images/hero.png"
-                    className="focus-img"
+                    src="../../assets/images/waste-report3.png"
+                    className="editorials-img img-fluid"
                     alt="Market analysis insights"
                   />
                 </div>
 
                 <div className="focus-text-box">
-                  <h5 className="">FOOD FORWARD</h5>
+                  <h5 className="">TECHCYCLE</h5>
                   <p className="focus-description">
-                    From Food Waste to Resource
+                    Closing the Loop on E-Waste
                   </p>
                 </div>
                 <Button className="btn sub-btn">View</Button>

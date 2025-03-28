@@ -1,7 +1,7 @@
 /* Section hero */
 .section-hero {
   background-color: #e5f7dd;
-  padding: 4.8rem 0 8rem 0;
+  padding: 4rem 0 3.2rem 0;
 }
 
 .hero {
@@ -22,7 +22,7 @@
 
 /* section impact */
 .section-impact {
-  padding: 3.6rem 0;
+  padding: 3.2rem 0 2.8rem 0;
 }
 
 .impact-description {
@@ -45,7 +45,7 @@
 /* section key */
 .section-key {
   background-color: #e5f7dd;
-  padding: 4.8rem 0 3.2rem 0;
+  padding: 2.8rem 0 2.8rem 0;
 }
 
 .key-header {
@@ -170,4 +170,30 @@
 
 .section-previous {
   padding: 3.2rem 0 3.2rem 0;
+}
+
+/* events and collab */
+.event-img {
+  height: 20rem;
+}
+
+.upcoming-img {
+  height: 20rem;
+}
+
+.previous-img {
+  height: 20rem;
+}
+.editorials-img {
+  height: 20rem;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+.registration-form {
+  border: 1px solid #3f6d2c;
+  padding: 1rem;
+  border-radius: 5px;
 }
