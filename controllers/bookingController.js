@@ -27,3 +27,18 @@ export const createBooking = async (req, res) => {
       .json({ msg: "Error creating booking" });
   }
 };
+
+export const getAllBookings = async (req, res) => {
+  try {
+    const bookings = await Booking.find()
+      .populate("userId", "firstName lastName email")
+      .populate("eventId", "title location eventDate capacity type");
+
+    res.status(StatusCodes.OK).json({ bookings });
+  } catch (error) {
+    console.error("Error fetching bookings:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: "Something went wrong" });
+  }
+};

@@ -4,6 +4,8 @@ import * as dotenv from "dotenv";
 import authRouter from "./routes/authRouter.js";
 import eventRouter from "./routes/eventRouter.js";
 import bookingRouter from "./routes/bookingRouter.js";
+import userRouter from "./routes/userRouter.js";
+
 import mongoose from "mongoose";
 dotenv.config();
 
@@ -38,3 +40,4 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/event", eventRouter);
 app.use("/api/v1/booking", bookingRouter);
+app.use("/api/v1/user", userRouter);

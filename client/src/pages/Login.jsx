@@ -5,12 +5,14 @@ const Login = () => {
   return (
     <section className="section-hero">
       <div className="container">
-        <div className="hero row">
-          <div className="col-sm-7">
+        <div className="login-container">
+          <div className="col-sm-6">
             <LoginForm />
           </div>
-          <div className="col-sm-5 d-none d-sm-block">
-            <img src={login} alt="Arcadia Login photo" className="loginsvg" />
+          <div className="col-sm-6 d-none d-sm-block ">
+            <div className="d-flex justify-content-center">
+              <img src={login} alt="Arcadia Login photo" className="loginsvg" />
+            </div>
           </div>
         </div>
       </div>

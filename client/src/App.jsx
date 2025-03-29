@@ -5,6 +5,7 @@ import FooterLayout from "./pages/layouts/FooterLayout";
 import Events from "./pages/Events";
 import Publications from "./pages/Publications";
 import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/publications" element={<Publications />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <FooterLayout />
     </BrowserRouter>
