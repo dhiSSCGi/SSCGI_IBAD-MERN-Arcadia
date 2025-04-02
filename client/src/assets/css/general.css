@@ -99,6 +99,7 @@ body {
 
 .nav-bg {
   background-color: #3f6d2c;
+  position: relative;
 }
 
 .brand-title {

@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Publications from "./pages/Publications";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Innovations from "./pages/Innovations";
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +15,8 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/events" element={<Events />} />
         <Route path="/publications" element={<Publications />} />
+        <Route path="/innovations" element={<Innovations />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

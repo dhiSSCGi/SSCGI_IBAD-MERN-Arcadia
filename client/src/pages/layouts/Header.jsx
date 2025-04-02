@@ -20,7 +20,7 @@ const Header = () => {
 
   return (
     <Navbar collapseOnSelect expand="sm" className="nav-bg">
-      <Container className="nav-container">
+      <Container className="nav-container sticky-top">
         <div className="d-flex align-items-center">
           <Navbar.Brand href="/">
             <img
@@ -48,7 +48,9 @@ const Header = () => {
             <Nav.Link href="/publications" className="text-white">
               Publications
             </Nav.Link>
-
+            <Nav.Link href="/innovations" className="text-white">
+              Innovations
+            </Nav.Link>
             {isLoggedIn ? (
               <>
                 <Nav.Link href="/profile" className="text-white">

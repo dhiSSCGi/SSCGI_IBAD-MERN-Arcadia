@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 import Users from "./dashboard/Users";
 import Events from "./dashboard/Events";
 import Bookings from "./dashboard/Bookings";
@@ -55,6 +55,8 @@ const DashboardContent = ({ selected }) => {
     </div>
   );
 };
+
+const DashboardContext = createContext();
 
 const Dashboard = () => {
   const [selected, setSelected] = useState("events");
