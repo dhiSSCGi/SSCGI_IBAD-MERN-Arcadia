@@ -14,10 +14,13 @@ const port = process.env.PORT || 5100;
 
 app.use(express.json());
 app.use(morgan("dev"));
-
+app.use(express.static(path.resolve(__dirname, "./client/dist")));
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+});
 
 // app.listen(port, () => {
 //   console.log(`server running on PORT ${port}....`);
