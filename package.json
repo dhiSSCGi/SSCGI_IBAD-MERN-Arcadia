@@ -9,7 +9,8 @@
     "dev": "concurrently --kill-others-on-fail \" npm run server\" \" npm run client\"",
     "server": "nodemon server",
     "client": "cd client && npm run dev",
-    "watch": "node --watch server.js "
+    "watch": "node --watch server.js ",
+    "setup-production-app": "npm i && cd client && npm i && npm run build"
   },
   "repository": {
     "type": "git",
