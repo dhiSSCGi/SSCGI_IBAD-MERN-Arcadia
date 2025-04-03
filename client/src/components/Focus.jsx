@@ -149,7 +149,7 @@ const Focus = () => {
   return (
     <>
       <section className="section-focus">
-        <div className="container">
+        <div className="container-fluid px-6">
           <h3 className="heading-tertiary">
             Our Focus in the Philippines Context
           </h3>
@@ -164,7 +164,7 @@ const Focus = () => {
             change and advancing circular economy practices.
           </p>
         </div>
-        <div className="container">
+        <div className="container-fluid px-6">
           <div className="row">
             <div className="col-md-4">
               <div className="card focus-card">

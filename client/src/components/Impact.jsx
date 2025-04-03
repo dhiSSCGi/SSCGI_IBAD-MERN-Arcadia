@@ -3,7 +3,7 @@ import React from "react";
 const Impact = () => {
   return (
     <section className="section-impact">
-      <div className="container">
+      <div className="container-fluid px-6">
         <div className="row">
           <div className="col-md-7">
             <div className="impact-text-box">

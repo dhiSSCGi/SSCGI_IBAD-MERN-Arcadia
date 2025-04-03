@@ -8,7 +8,7 @@ import {
 const Key = () => {
   return (
     <section className="section-key">
-      <div className="container">
+      <div className="container-fluid px-6">
         <h3 className="heading-tertiary">Three Key Components</h3>
         <p className="key-text">
           Arcadia’s methodology revolves around fostering a continuous cycle of
@@ -16,7 +16,7 @@ const Key = () => {
           and drive meaningful sustainability outcomes. Our key pillars include:
         </p>
       </div>
-      <div className="container">
+      <div className="container-fluid px-6">
         <div className="row">
           <div className="col-md-4">
             <div className="key-header">

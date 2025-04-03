@@ -1,10 +1,10 @@
 import React from "react";
-const MainEvents = () => {
+const MainInnovations = () => {
   return (
     <section className="section-main-events vh-90 d-flex align-items-center justify-content-center">
-      <p className="heading-primary">EVENTS & COLLABORATION</p>
+      <p className="heading-primary">SOLUTIONS FAIR</p>
     </section>
   );
 };
 
-export default MainEvents;
+export default MainInnovations;

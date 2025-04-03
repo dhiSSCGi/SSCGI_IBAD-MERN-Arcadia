@@ -3,10 +3,10 @@ import { Button } from "react-bootstrap";
 const Previous = () => {
   return (
     <section className="section-previous">
-      <div className="container text-center">
+      <div className="container-fluid px-6 text-center">
         <h3 className="heading-tertiary">Previous Events</h3>
       </div>
-      <div className="container">
+      <div className="container-fluid px-6">
         <div className="row">
           <div className="col-md-4">
             <div className="card focus-card">

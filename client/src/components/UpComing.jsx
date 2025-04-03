@@ -38,7 +38,7 @@ function ImpactMixerModal(props) {
   return (
     <Modal
       {...props}
-      dialogClassName="modal-90w"
+      dialogClassName="modal-xl"
       aria-labelledby="example-custom-modal-styling-title"
     >
       <Modal.Header closeButton>
@@ -48,7 +48,7 @@ function ImpactMixerModal(props) {
       </Modal.Header>
       <Modal.Body>
         <div className="row">
-          <div className="col-md-6">
+          <div className="">
             <div className="d-flex flex-column align-items-center">
               <img
                 src="../../assets/images/upcoming1.png"
@@ -80,91 +80,14 @@ function ImpactMixerModal(props) {
               <b>Location:</b> GreenTech Conference Center, Downtown.
             </p>
           </div>
-
-          <div className="col-md-6 ">
-            <div className="registration-form">
-              <h4>Registration Form</h4>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="location">Location</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="location"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="contactNumber">Contact Number</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="contactNumber"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <button type="submit" className="btn sub-btn mt-3">
-                  Submit
-                </button>
-              </form>
-            </div>
+          <div className="d-flex justify-content-center">
+            <button
+              type="button"
+              className="btn main-btn"
+              style={{ width: "10rem" }}
+            >
+              Join
+            </button>
           </div>
         </div>
       </Modal.Body>
@@ -206,7 +129,7 @@ function PlasticPathwaysModal(props) {
   return (
     <Modal
       {...props}
-      dialogClassName="modal-90w"
+      dialogClassName="modal-xl"
       aria-labelledby="example-custom-modal-styling-title"
     >
       <Modal.Header closeButton>
@@ -216,7 +139,7 @@ function PlasticPathwaysModal(props) {
       </Modal.Header>
       <Modal.Body>
         <div className="row">
-          <div className="col-md-6">
+          <div className="">
             <div className="d-flex flex-column align-items-center">
               <img
                 src="../../assets/images/upcoming2.png"
@@ -248,91 +171,14 @@ function PlasticPathwaysModal(props) {
               <b>Location:</b> EcoTech Innovation Hub, Uptown.
             </p>
           </div>
-
-          <div className="col-md-6 ">
-            <div className="registration-form">
-              <h4>Registration Form</h4>
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="lastName"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="location">Location</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="location"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="contactNumber">Contact Number</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="contactNumber"
-                    name="contactNumber"
-                    value={formData.contactNumber}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <button type="submit" className="btn sub-btn mt-3">
-                  Submit
-                </button>
-              </form>
-            </div>
+          <div className="d-flex justify-content-center">
+            <button
+              type="button"
+              className="btn main-btn"
+              style={{ width: "10rem" }}
+            >
+              Join
+            </button>
           </div>
         </div>
       </Modal.Body>
@@ -355,10 +201,10 @@ const UpComing = () => {
   return (
     <>
       <section className="section-upcoming">
-        <div className="container text-center">
+        <div className="container-fluid px-6 text-center">
           <h3 className="heading-tertiary">Upcoming Events</h3>
         </div>
-        <div className="container">
+        <div className="container-fluid px-6">
           <div className="row">
             <div className="col-md-6">
               <div className="card focus-card">

@@ -152,8 +152,9 @@
 
 .event-card {
   background: rgba(256, 256, 256, 0.75);
-  background: linear-gradient(45deg, #7ed957, #ffffff);
+  background: linear-gradient(45deg, #7ed957, #adfbd1);
   padding: 1rem;
+  border-radius: 5px;
 }
 
 .margin-bottom {

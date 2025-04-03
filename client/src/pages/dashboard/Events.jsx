@@ -1,6 +1,6 @@
 import React from "react";
 import customFetch from "../../utils/customFetch";
-
+import EventContainer from "../../components/dashboard/EventContainer";
 const Events = () => {
   const [events, setEvents] = React.useState([]);
 
@@ -38,9 +38,10 @@ const Events = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container-fluid">
       <h1 className="mb-4">Events</h1>
-      <div className="table-responsive">
+      <EventContainer events={events} />
+      {/* <div className="table-responsive">
         <table className="table  table-bordered vh-100">
           <thead className="table-header">
             <tr>
@@ -78,7 +79,7 @@ const Events = () => {
             )}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 const SectionEvent = () => {
   return (
     <section className="section-events">
-      <div className="container">
+      <div className="container-fluid px-6">
         <h3 className="heading-tertiary">EVENTS & COLLABORATION</h3>
         <p className="key-text">
           Comprehensive events including forums, panel discussions, deep-dive
@@ -11,7 +11,7 @@ const SectionEvent = () => {
           sustainability solutions.
         </p>
       </div>
-      <div className="container p-3">
+      <div className="container-fluid px-6">
         <div className="row margin-bottom d-flex align-items-center flex-column-reverse flex-md-row">
           <div className="col-md-7">
             <div className="event-card">

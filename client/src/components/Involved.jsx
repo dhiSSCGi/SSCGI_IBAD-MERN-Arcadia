@@ -70,7 +70,7 @@ const InvolvedSidebar = ({ onSelectInvolve }) => {
 
 const InvolvedContent = ({ selectedInvolved }) => {
   return (
-    <div className="container p-3">
+    <div className="container-fluid px-6">
       {selectedInvolved === "1" && (
         <div className="container p-3">
           <h5 className="involved-title">
@@ -211,7 +211,7 @@ const Involved = () => {
   const [selected, setSelected] = useState("1");
 
   return (
-    <div className="container p-5">
+    <div className="container-fluid p-6">
       <h3 className="involved-heading">
         How to Get <b>Involved</b>
       </h3>

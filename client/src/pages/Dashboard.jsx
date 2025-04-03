@@ -41,17 +41,9 @@ const Sidebar = ({ onSelect }) => {
 
 const DashboardContent = ({ selected }) => {
   return (
-    <div className="container">
-      {selected === "events" && (
-        <div>
-          <Events />
-        </div>
-      )}
-      {selected === "bookings" && (
-        <div>
-          <Bookings />
-        </div>
-      )}
+    <div className="container-fluid">
+      {selected === "events" && <Events />}
+      {selected === "bookings" && <Bookings />}
     </div>
   );
 };

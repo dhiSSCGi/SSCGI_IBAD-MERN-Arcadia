@@ -6,6 +6,7 @@ const EventSchema = new mongoose.Schema(
     description: { type: String, required: true },
     eventDate: { type: Date, required: true },
     location: { type: String, required: true },
+    participants: { type: Number, required: true, default: 0 },
     capacity: { type: Number, required: true },
     price: { type: Number, required: true },
     type: { type: String, required: true },
@@ -16,7 +17,9 @@ const EventSchema = new mongoose.Schema(
     },
     registrationStart: { type: Date, required: true },
     registrationEnd: { type: Date, required: true },
+    registrationLink: { type: String, required: true },
     category: { type: [String], required: true },
+    eventData: { type: String, required: true },
   },
   {
     timestamps: true,

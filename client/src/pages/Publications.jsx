@@ -1,53 +1,16 @@
 import React from "react";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
+import MainPublications from "../components/MainPublications";
 const Publications = () => {
   return (
     <>
-      <section className="section-main-events">
-        <Carousel className="carousel">
-          <Carousel.Item className="carousel-item">
-            <img
-              className="d-block carousel-img"
-              src="../../assets/images/event1.png"
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item">
-            <img
-              className="d-block carousel-img"
-              src="../../assets/images/event2.png"
-              alt="Second slide"
-            />
-            <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item className="carousel-item">
-            <img
-              className="d-block carousel-img"
-              src="../../assets/images/event3.png"
-              alt="Third slide"
-            />
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        </Carousel>
-      </section>
+      <MainPublications />
       <section className="section-events">
-        <div className="container">
+        <div className="container-fluid px-6">
           <h3 className="heading-tertiary">KNOWLEDGE HUB</h3>
         </div>
-        <div className="container">
+        <div className="container-fluid px-6">
           <div className="row margin-bottom">
             <div className="col-md-6">
               <div className="event-card">
@@ -141,10 +104,10 @@ const Publications = () => {
       </section>
 
       <section className="section-upcoming">
-        <div className="container text-center">
+        <div className="container-fluid px-6 text-center">
           <h3 className="heading-tertiary">Opinion Editorials</h3>
         </div>
-        <div className="container">
+        <div className="container-fluid px-6">
           <div className="row">
             <div className="col-md-4">
               <div className="card focus-card">
@@ -207,10 +170,10 @@ const Publications = () => {
         </div>
       </section>
       <section className="section-previous">
-        <div className="container text-center">
+        <div className="container-fluid px-6 text-center">
           <h3 className="heading-tertiary">Published Waste Reports</h3>
         </div>
-        <div className="container">
+        <div className="container-fluid px-6">
           <div className="row">
             <div className="col-md-4">
               <div className="card focus-card">
