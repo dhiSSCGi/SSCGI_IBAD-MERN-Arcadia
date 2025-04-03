@@ -5,12 +5,17 @@ import authRouter from "./routes/authRouter.js";
 import eventRouter from "./routes/eventRouter.js";
 import bookingRouter from "./routes/bookingRouter.js";
 import userRouter from "./routes/userRouter.js";
-
 import mongoose from "mongoose";
+
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import path from "path";
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5100;
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.json());
 app.use(morgan("dev"));
