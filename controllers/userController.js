@@ -12,3 +12,14 @@ export const getAllUsers = async (req, res) => {
   const users = await User.find();
   res.status(StatusCodes.OK).json({ users });
 };
+
+export const getAllOrganizers = async (req, res) => {
+  const users = await User.find({ role: "organizer" });
+  res.status(StatusCodes.OK).json({ users });
+};
+
+export const getCurrentUser = async (req, res) => {
+  console.log(req.body);
+
+  res.status(StatusCodes.OK).json({ token });
+};

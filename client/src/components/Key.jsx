@@ -19,37 +19,44 @@ const Key = () => {
       <div className="container-fluid px-6">
         <div className="row">
           <div className="col-md-4">
-            <div className="key-header">
-              <FontAwesomeIcon icon={faCalendar} className="key-icon" />
-              <p className="key-title">Events</p>
+            <div className="key-card">
+              <div className="key-header text-center">
+                <div className="icon-container">
+                  <FontAwesomeIcon icon={faCalendar} className="key-icon" />
+                </div>
+                <h4 className="key-title">Events</h4>
+              </div>
+
+              <p className="key-text">
+                Arcadia serves as a platform that brings together youth,
+                businesses, researchers, governments, and industry experts
+                through forums, summits, workshops, and hackathons. These events
+                are designed to foster meaningful dialogue on sustainability
+                challenges, share best practices, explore emerging policies, and
+                discuss innovative solutions. By connecting diverse
+                stakeholders, we facilitate knowledge exchange and the
+                exploration of new topics critical to driving the sustainability
+                agenda forward.
+              </p>
+
+              <p className="key-text">
+                Additionally, our hackathons and campaign-driven projects enable
+                companies to engage with young innovators to solve pressing
+                challenges, support advocacy efforts, and amplify information
+                and education campaigns. Through these collaborative
+                initiatives, Arcadia empowers stakeholders to co-create
+                actionable solutions that address real-world sustainability
+                issues, ensuring progress toward a more sustainable future.
+              </p>
             </div>
-
-            <p className="key-text">
-              Arcadia serves as a platform that brings together youth,
-              businesses, researchers, governments, and industry experts through
-              forums, summits, workshops, and hackathons. These events are
-              designed to foster meaningful dialogue on sustainability
-              challenges, share best practices, explore emerging policies, and
-              discuss innovative solutions. By connecting diverse stakeholders,
-              we facilitate knowledge exchange and the exploration of new topics
-              critical to driving the sustainability agenda forward.
-            </p>
-
-            <p className="key-text">
-              Additionally, our hackathons and campaign-driven projects enable
-              companies to engage with young innovators to solve pressing
-              challenges, support advocacy efforts, and amplify information and
-              education campaigns. Through these collaborative initiatives,
-              Arcadia empowers stakeholders to co-create actionable solutions
-              that address real-world sustainability issues, ensuring progress
-              toward a more sustainable future.
-            </p>
           </div>
           <div className="col-md-4">
-            <div className="key">
-              <div className="key-header">
-                <FontAwesomeIcon icon={faBook} className="key-icon" />
-                <p className="key-title">Knowledge Portal</p>
+            <div className="key-card">
+              <div className="key-header text-center">
+                <div className="icon-container">
+                  <FontAwesomeIcon icon={faBook} className="key-icon" />
+                </div>
+                <h4 className="key-title">Knowledge Portal</h4>
               </div>
               <p className="key-text">
                 Arcadia serves as a centralized resource for cutting-edge
@@ -69,10 +76,14 @@ const Key = () => {
             </div>
           </div>
           <div className="col-md-4">
-            <div className="key">
-              <div className="key-header">
-                <FontAwesomeIcon icon={faPeopleArrows} className="key-icon" />
-                <p className="key-title">Innovations and Solutions Exchange</p>
+            <div className="key-card">
+              <div className="key-header text-center">
+                <div className="icon-container">
+                  <FontAwesomeIcon icon={faPeopleArrows} className="key-icon" />
+                </div>
+                <h4 className="key-title">
+                  Innovations and Solutions Exchange
+                </h4>
               </div>
               <p className="key-text">
                 Arcadia collaborates with forward-thinking companies to showcase

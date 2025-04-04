@@ -22,7 +22,7 @@ const Impact = () => {
           <div className="col-sm-5 d-none d-sm-block">
             <div className="impact-img-box">
               <img
-                src="../../assets/images/growing.png"
+                src="../assets/images/impacts.jpg"
                 className="impact-img"
                 alt="Market analysis insights"
               />

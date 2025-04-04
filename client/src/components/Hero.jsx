@@ -1,32 +1,36 @@
 import React from "react";
+import heroImage from "../assets/images/logo.png";
 
 const Hero = () => {
+  const handleJoinEvent = () => {
+    window.location.href = "/events#section-upcoming-events";
+  };
+
   return (
-    <section className="section-hero">
-      <div className="hero row">
-        <div className="col-sm-7">
-          <div className="hero-text-box">
-            <h1 className="heading-primary">
-              Driving Progress Towards a Circular Economy
-            </h1>
-            <p className="hero-description">
-              DH Planet is a sustainability hub empowering individuals and
-              businesses to adopt eco-friendly practices and drive positive
-              environmental change.
-            </p>
-            <button type="button" className="btn main-btn">
-              Join Event
-            </button>
-          </div>
-        </div>
-        <div className="col-sm-5 d-none d-sm-block">
-          <div className="hero-img-box">
-            <img
-              src="../../assets/images/hero.png"
-              className="hero-img"
-              alt="earth"
-            />
-          </div>
+    <section
+      className="hero-section vh-100 text-center position-relative"
+      style={{ position: "relative", zIndex: 1 }}
+    >
+      <div
+        className="d-flex flex-column justify-content-center align-items-center h-100"
+        style={{ position: "relative", zIndex: 2 }}
+      >
+        <img src={heroImage} alt="Hero Logo" className="mb-4" />
+        <h1 id="typing-text" className="display-1 fw-bold text-white mb-4">
+          Arcadia
+        </h1>
+        <div className="hero-text-box text-center">
+          <h2 className="driving-text mb-3">
+            Driving Progress Towards a Circular Economy
+          </h2>
+
+          <button
+            type="button"
+            className="btn btn-primary main-btn px-4 py-2"
+            onClick={handleJoinEvent}
+          >
+            Join Event
+          </button>
         </div>
       </div>
     </section>

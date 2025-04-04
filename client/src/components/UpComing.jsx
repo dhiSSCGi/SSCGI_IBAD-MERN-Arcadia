@@ -1,272 +1,192 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import axios from "axios";
 import customFetch from "../utils/customFetch";
-import { toast } from "react-toastify";
-function ImpactMixerModal(props) {
-  const [formData, setFormData] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    location: "",
-    contactNumber: "",
-    eventId: "67e6631dea316f8e66ef9d07",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    customFetch
-      .post("/booking", formData)
-      .then((response) => {
-        console.log("Data sent successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error sending data:", error);
-      });
-  };
-  return (
-    <Modal
-      {...props}
-      dialogClassName="modal-xl"
-      aria-labelledby="example-custom-modal-styling-title"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          <b>FLAGSHIP</b> PROJECT #3
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="row">
-          <div className="">
-            <div className="d-flex flex-column align-items-center">
-              <img
-                src="../../assets/images/upcoming1.png"
-                alt="impact mixer"
-                className="img-fluid"
-              />
-
-              <h3>Impact Mixer</h3>
-            </div>
-
-            <p>
-              <b>Impact Mixer:</b> Join us this week to explore groundbreaking
-              innovations and connect with industry leaders.
-            </p>
-            <br />
-            <p>
-              <b>Focus:</b> Supply chain optimization, food recovery,
-              waste-to-energy innovations, and sustainable practices.
-            </p>
-            <p>
-              <b>Target Audience: </b>Restaurants, food manufacturers,
-              retailers, municipal governments, and sustainability enthusiasts.
-            </p>
-            <p>
-              <b>Date & Time:</b> Thursday, March 16th, 2023, from 10:00 AM to
-              2:00 PM.
-            </p>
-            <p>
-              <b>Location:</b> GreenTech Conference Center, Downtown.
-            </p>
-          </div>
-          <div className="d-flex justify-content-center">
-            <button
-              type="button"
-              className="btn main-btn"
-              style={{ width: "10rem" }}
-            >
-              Join
-            </button>
-          </div>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-}
-
-function PlasticPathwaysModal(props) {
-  const [formData, setFormData] = React.useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    location: "",
-    contactNumber: "",
-    eventId: "67e66321ea316f8e66ef9d09",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    customFetch
-      .post("/booking", formData)
-      .then((response) => {
-        console.log("Data sent successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error sending data:", error);
-      });
-  };
-  return (
-    <Modal
-      {...props}
-      dialogClassName="modal-xl"
-      aria-labelledby="example-custom-modal-styling-title"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          <b>FLAGSHIP</b> PROJECT #4
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="row">
-          <div className="">
-            <div className="d-flex flex-column align-items-center">
-              <img
-                src="../../assets/images/upcoming2.png"
-                alt="plastic pathways"
-                className="img-fluid"
-              />
-
-              <h3>Plastic Pathways</h3>
-            </div>
-
-            <p>
-              <b>Plastic Pathways:</b> Join us to explore innovative solutions
-              for reducing plastic waste and promoting sustainable practices.
-            </p>
-            <br />
-            <p>
-              <b>Focus:</b> Plastic reuse, recycling technologies, and
-              eco-friendly alternatives.
-            </p>
-            <p>
-              <b>Target Audience: </b>Environmentalists, manufacturers,
-              policymakers, and sustainability advocates.
-            </p>
-            <p>
-              <b>Date & Time:</b> Friday, March 17th, 2023, from 11:00 AM to
-              3:00 PM.
-            </p>
-            <p>
-              <b>Location:</b> EcoTech Innovation Hub, Uptown.
-            </p>
-          </div>
-          <div className="d-flex justify-content-center">
-            <button
-              type="button"
-              className="btn main-btn"
-              style={{ width: "10rem" }}
-            >
-              Join
-            </button>
-          </div>
-        </div>
-      </Modal.Body>
-    </Modal>
-  );
-}
-
+import { Modal, Button } from "react-bootstrap";
+import axios from "axios";
 const UpComing = () => {
-  const [showImpactMixerModal, setShowImpactMixerModal] = React.useState(false);
-  const [showPlasticPathwaysModal, setShowPlasticPathwaysModal] =
-    React.useState(false);
+  const [events, setEvents] = React.useState([]);
+  const [currentEventIndex, setCurrentEventIndex] = React.useState(0);
+  const [selectedEvent, setSelectedEvent] = React.useState(null);
+  const [showModal, setShowModal] = React.useState(false);
+  const fetchEvents = async () => {
+    try {
+      const response = await customFetch.get("/event");
+      setEvents(response.data.events);
+    } catch (error) {
+      if (error.response) {
+        console.error("Response error:", error.response.data);
+        console.error("Status code:", error.response.status);
+        console.error("Headers:", error.response.headers);
+      } else if (error.request) {
+        console.error("Request error:", error.request);
+      } else {
+        console.error("Error:", error.message);
+      }
+    }
+  };
 
-  function handleShowImpactMixerModal() {
-    setShowImpactMixerModal(true);
-  }
-  function handleShowPlasticPathwaysModal() {
-    setShowPlasticPathwaysModal(true);
-  }
+  React.useEffect(() => {
+    fetchEvents();
+  }, []);
+
+  const visibleEvents = events.slice(currentEventIndex, currentEventIndex + 3);
+
+  const goToNextPage = () => {
+    const nextIndex =
+      currentEventIndex + 3 >= events.length ? 0 : currentEventIndex + 1;
+
+    setCurrentEventIndex(nextIndex);
+  };
+
+  const goToPreviousPage = () => {
+    const prevIndex =
+      currentEventIndex - 1 < 0 ? events.length - 3 : currentEventIndex - 1;
+
+    setCurrentEventIndex(prevIndex);
+  };
+
+  const handleCardClick = (event) => {
+    setSelectedEvent(event);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedEvent(null);
+  };
 
   return (
     <>
-      <section className="section-upcoming">
-        <div className="container-fluid px-6 text-center">
-          <h3 className="heading-tertiary">Upcoming Events</h3>
-        </div>
+      <section id="section-upcoming-events" className="py-5 bg-light">
         <div className="container-fluid px-6">
-          <div className="row">
-            <div className="col-md-6">
-              <div className="card focus-card">
-                <div className="focus-img-box">
-                  <img
-                    src="../../assets/images/upcoming1.png"
-                    className="img-fluid upcoming-img"
-                    alt="Market analysis insights"
-                  />
-                </div>
+          <h2 className="heading-tertiary  mb-0">Upcoming Events</h2>
 
-                <div className="focus-text-box">
-                  <h5 className="">IMPACT MIXER</h5>
-                  <p className="focus-description">
-                    Discover New Opportunities
-                  </p>
+          <div className="row justify-content-center position-relative">
+            <button
+              onClick={goToPreviousPage}
+              className="btn btn-sm btn-outline-secondary rounded-circle me-2 bg-main-color prev-button"
+              style={{ width: "32px", height: "32px", padding: "0" }}
+              aria-label="Previous page"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mx-auto"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+            <button
+              onClick={goToNextPage}
+              className="btn btn-sm btn-outline-secondary rounded-circle  bg-main-color  next-button"
+              style={{ width: "32px", height: "32px", padding: "0" }}
+              aria-label="Next page"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mx-auto"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+            {visibleEvents.map((event) => (
+              <div
+                key={event.id}
+                className="col-md-4 mb-4"
+                onClick={() => handleCardClick(event)}
+                style={{ cursor: "pointer" }}
+              >
+                <div className="card shadow-sm h-100">
+                  <div
+                    className="bg-secondary bg-opacity-25 w-100"
+                    style={{
+                      aspectRatio: "1/1",
+                      backgroundImage: `url(${event.image})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  ></div>
+                  <div className="card-body">
+                    <p className="small text-primary fw-medium mb-1">
+                      {event.type}
+                    </p>
+                    <p className="small fw-medium mb-1">{event.title}</p>
+                    <p className="small text-muted">
+                      {new Date(event.eventDate).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </p>
+                    <p className="small text-muted">{event.description}</p>
+                  </div>
                 </div>
-                <Button
-                  className="btn sub-btn"
-                  onClick={handleShowImpactMixerModal}
-                >
-                  Join
-                </Button>
               </div>
-            </div>
-            <div className="col-md-6">
-              <div className="card focus-card">
-                <div className="focus-img-box">
-                  <img
-                    src="../../assets/images/upcoming2.png"
-                    className="img-fluid upcoming-img"
-                    alt="Market analysis insights"
-                  />
-                </div>
-
-                <div className="focus-text-box">
-                  <h5 className="">PLASTIC PATHWAYS</h5>
-                  <p className="focus-description">
-                    Leading the Way in Plastic Reuse & Reduction
-                  </p>
-                </div>
-                <Button
-                  className="btn sub-btn"
-                  onClick={handleShowPlasticPathwaysModal}
-                >
-                  View
-                </Button>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <ImpactMixerModal
-        show={showImpactMixerModal}
-        onHide={() => setShowImpactMixerModal(false)}
-      />
-
-      <PlasticPathwaysModal
-        show={showPlasticPathwaysModal}
-        onHide={() => setShowPlasticPathwaysModal(false)}
-      />
+      {selectedEvent && (
+        <Modal size="lg" show={showModal} onHide={handleCloseModal}>
+          <Modal.Header closeButton>
+            <Modal.Title>{selectedEvent.title}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div
+              className="mb-3"
+              style={{
+                width: "100%",
+                aspectRatio: "16/9",
+                backgroundImage: `url(${selectedEvent.image})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+            <p>
+              <strong>Type:</strong> {selectedEvent.type}
+            </p>
+            <p>
+              <strong>Date:</strong>{" "}
+              {new Date(selectedEvent.eventDate).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <p>{selectedEvent.description}</p>
+            <div className="d-flex justify-content-center">
+              <a
+                href={selectedEvent.registrationLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Join Event
+              </a>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleCloseModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
     </>
   );
 };

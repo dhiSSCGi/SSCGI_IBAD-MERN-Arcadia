@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
   },
   avatar: String,
   avatarPublicId: String,
+  loginToken: String,
 });
 
 UserSchema.methods.toJSON = function () {

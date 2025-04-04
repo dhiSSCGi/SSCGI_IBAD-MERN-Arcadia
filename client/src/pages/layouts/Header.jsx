@@ -1,21 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-const Header = () => {
+import customFetch from "../../utils/customFetch";
+import { toast } from "react-toastify";
+
+const Header = ({ user, setUser }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
+
   useEffect(() => {
-    const user = localStorage.getItem("user");
-    setIsLoggedIn(!!user);
-  }, []);
+    if (user) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [user]);
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    customFetch
+      .get("/auth/logout")
+      .then(() => {
+        toast.success("Logged out successfully");
+      })
+      .catch((error) => {
+        console.error("Error during logout:", error);
+        toast.error("Error logging out");
+      });
+
+    // Clear localStorage and update state
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser(null); // Remove the user from the state
     setIsLoggedIn(false);
-    navigate("/login");
+    navigate("/login"); // Redirect to login page
   };
 
   return (
@@ -53,13 +72,13 @@ const Header = () => {
             </Nav.Link>
             {isLoggedIn ? (
               <>
-                <Nav.Link href="/profile" className="text-white">
-                  Profile
+                <Nav.Link href="/dashboard" className="text-white">
+                  Dashboard
                 </Nav.Link>
                 <Nav.Link
                   href="#"
                   onClick={handleLogout}
-                  className="btn logout-btn"
+                  className="btn login-btn"
                 >
                   Logout
                 </Nav.Link>

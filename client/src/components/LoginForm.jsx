@@ -25,6 +25,7 @@ const LoginForm = () => {
       toast.error(error?.response?.data?.msg);
     }
   };
+
   const loginUser = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -33,24 +34,20 @@ const LoginForm = () => {
     const data = { email, password };
 
     try {
-      // Send login request to the server
       const response = await customFetch.post("/auth/login", data);
 
       console.log("Response Data:", response);
 
-      // Assuming response contains `user` and `token` data
       const { user, token } = response.data;
 
-      // Save user and token in localStorage
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
 
-      // Show success toast
       toast.success("Login successful");
 
-      navigate("/dashboard");
+      window.location.href = "/dashboard";
     } catch (error) {
-      toast.error(error?.response?.data?.msg || "Login failed");
+      toast.error(error?.response?.data?.message || "Login failed");
       console.error("Login Error:", error);
     }
   };

@@ -19,7 +19,9 @@ const EventSchema = new mongoose.Schema(
     registrationEnd: { type: Date, required: true },
     registrationLink: { type: String, required: true },
     category: { type: [String], required: true },
-    eventData: { type: String, required: true },
+    eventDataLink: { type: String },
+    image: { type: String },
+    imageId: { type: String },
   },
   {
     timestamps: true,
