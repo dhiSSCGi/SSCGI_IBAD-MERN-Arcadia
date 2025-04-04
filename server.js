@@ -41,11 +41,9 @@ app.use("/api/v1/booking", bookingRouter);
 app.use("/api/v1/user", userRouter);
 
 // Serve index.html for all routes that are not API or static file requests
-if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
-  });
-}
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/dist", "index.html"));
+});
 
 // Database connection
 try {
