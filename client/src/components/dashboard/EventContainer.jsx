@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
 import customFetch from "../../utils/customFetch.js";
-const EventCard = ({ event }) => {
+import { toast } from "react-toastify";
+
+const EventCard = ({ event, fetchEvents }) => {
   const [showModal, setShowModal] = useState(false);
+  const [file, setFile] = useState(null);
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
-  const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -32,9 +33,9 @@ const EventCard = ({ event }) => {
       alert("Please select a file before submitting.");
       return;
     }
-
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("data", file);
+    formData.append("eventId", event._id);
 
     try {
       const response = await customFetch.post(
@@ -46,22 +47,119 @@ const EventCard = ({ event }) => {
           },
         }
       );
+
       alert("File uploaded successfully!");
       console.log(response.data);
+
+      // Reset file state and UI elements after successful upload
       setFile(null);
       document.getElementById("submitButton").style.display = "none";
       const fileNameDisplay = document.getElementById("fileNameDisplay");
       if (fileNameDisplay) {
         fileNameDisplay.remove();
       }
+
+      fetchEvents();
     } catch (error) {
       console.error("Error uploading file:", error);
       alert("Failed to upload file. Please try again.");
     }
   };
+
+  const [updateModalShow, setUpdateModalShow] = useState(false);
+  const [updatedEvent, setUpdatedEvent] = useState({
+    title: event.title,
+    description: event.description,
+    eventDate: event.eventDate,
+    location: event.location,
+    capacity: event.capacity,
+    image: event.image,
+  });
+
+  const handleImageChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setUpdatedEvent((prev) => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(selectedFile);
+      setUpdatedEvent((prev) => ({
+        ...prev,
+        image: URL.createObjectURL(selectedFile),
+      }));
+    }
+  };
+  const handleUpdateModalShow = () => setUpdateModalShow(true);
+
+  const handleUpdateModalClose = () => setUpdateModalShow(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdatedEvent((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleUpdateSubmit = async () => {
+    try {
+      await customFetch.patch(`/event/update/${event._id}`, updatedEvent);
+      toast.success("Event updated successfully!");
+      fetchEvents();
+      handleUpdateModalClose();
+    } catch (error) {
+      console.error("Error updating event:", error);
+      alert("Failed to update event. Please try again.");
+    }
+  };
+
+  async function handleDeleteEvent(eventId) {
+    try {
+      await customFetch.delete(`/event/delete/${eventId}`);
+      toast.success("Event deleted successfully!");
+      fetchEvents();
+    } catch (error) {
+      console.error("Error deleting event:", error);
+      alert("Failed to delete event. Please try again.");
+    }
+  }
+
   return (
     <>
-      <div className="card event-card h-100">
+      <div className="card event-card h-100 position-relative">
+        <button
+          className="btn btn-danger btn-sm position-absolute top-0 end-0 "
+          onClick={() => {
+            toast.info(
+              <div>
+                <p>Are you sure you want to delete this event?</p>
+                <div className="d-flex justify-content-center gap-2">
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => {
+                      handleDeleteEvent(event._id);
+                      toast.dismiss();
+                    }}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    onClick={() => toast.dismiss()}
+                  >
+                    No
+                  </button>
+                </div>
+              </div>,
+              {
+                position: "top-center",
+                autoClose: false,
+                closeOnClick: false,
+                draggable: false,
+              }
+            );
+          }}
+        >
+          ✕
+        </button>
         <img
           src={event.image}
           alt={event.title}
@@ -77,14 +175,36 @@ const EventCard = ({ event }) => {
           <p className="card-text">
             <strong>Location:</strong> {event.location}
           </p>
+          <p className="card-text">
+            <strong>Participants:</strong> {event.participants} /{" "}
+            {event.capacity}
+          </p>
           <div className="mt-3">
-            <div className="d-flex gap-2">
-              <button onClick={handleShowModal} className="btn btn-primary">
-                View Details
-              </button>
-              <a href={event.eventDataLink} className="btn btn-secondary">
-                View Participants
-              </a>
+            <div className="event-card-btns">
+              <div className="col">
+                <button
+                  onClick={handleShowModal}
+                  className="btn btn-primary event-card-btn"
+                >
+                  View Details
+                </button>
+              </div>
+              <div className="col">
+                <a
+                  href={event.eventDataLink}
+                  className="btn-secondary event-card-btn"
+                >
+                  View Participants
+                </a>
+              </div>
+              <div className="col">
+                <button
+                  onClick={handleUpdateModalShow}
+                  className="btn btn-warning event-card-btn"
+                >
+                  Update
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -113,6 +233,10 @@ const EventCard = ({ event }) => {
           </p>
           <p>
             <strong>Location:</strong> {event.location}
+          </p>
+          <p>
+            <strong>Participants:</strong> {event.participants} /{" "}
+            {event.capacity}
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -147,17 +271,123 @@ const EventCard = ({ event }) => {
           </div>
         </Modal.Footer>
       </Modal>
+
+      <Modal show={updateModalShow} onHide={handleUpdateModalClose} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Update Event</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Title
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="title"
+                name="title"
+                value={updatedEvent.title}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
+                Description
+              </label>
+              <textarea
+                className="form-control"
+                id="description"
+                name="description"
+                rows="3"
+                value={updatedEvent.description}
+                onChange={handleInputChange}
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="eventDate" className="form-label">
+                Date
+              </label>
+              <input
+                type="date"
+                className="form-control"
+                id="eventDate"
+                name="eventDate"
+                value={
+                  new Date(updatedEvent.eventDate).toISOString().split("T")[0]
+                }
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="location" className="form-label">
+                Location
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="location"
+                name="location"
+                value={updatedEvent.location}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="capacity" className="form-label">
+                Capacity
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="capacity"
+                name="capacity"
+                value={updatedEvent.capacity}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="image" className="form-label">
+                Image
+              </label>
+              <input
+                type="file"
+                className="form-control"
+                id="image"
+                name="image"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              {updatedEvent.image && (
+                <img
+                  src={updatedEvent.image}
+                  alt="Preview"
+                  className="img-fluid mt-3 rounded shadow-sm"
+                  style={{ maxHeight: "200px", objectFit: "cover" }}
+                />
+              )}
+            </div>
+          </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleUpdateModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleUpdateSubmit}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };
 
-const EventContainer = ({ events }) => {
+const EventContainer = ({ events, fetchEvents }) => {
   return (
     <div className="container-fluid ">
       <div className="row g-3">
         {events.map((event, index) => (
           <div key={index} className="col-md-4">
-            <EventCard event={event} />
+            <EventCard event={event} fetchEvents={fetchEvents} />
           </div>
         ))}
       </div>

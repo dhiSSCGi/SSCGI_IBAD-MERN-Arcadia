@@ -23,13 +23,17 @@ const Hero = () => {
           <h2 className="driving-text mb-3">
             Driving Progress Towards a Circular Economy
           </h2>
+          <h5 className="lead fw-medium text-white">
+            Arcadia is a sustainability hub empowering companies, innovators,
+            and communities to co-create circular solutions
+          </h5>
 
           <button
             type="button"
-            className="btn btn-primary main-btn px-4 py-2"
+            className="btn btn-primary main-btn px-4 py-2 text-dark"
             onClick={handleJoinEvent}
           >
-            Join Event
+            Join Us
           </button>
         </div>
       </div>

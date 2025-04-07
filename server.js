@@ -20,8 +20,9 @@ const port = process.env.PORT || 5100;
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 // Middleware setup
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
-app.use(express.json());
 app.use(morgan("dev"));
 
 // Cloudinary configuration

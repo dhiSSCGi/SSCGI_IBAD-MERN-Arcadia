@@ -35,7 +35,7 @@ const Sidebar = ({ onSelect }) => {
         >
           Users
         </li>
-        <li
+        {/* <li
           onClick={() => onSelect("users")}
           className="menu-item"
           style={{
@@ -56,7 +56,7 @@ const Sidebar = ({ onSelect }) => {
           }}
         >
           Waste Reports
-        </li>
+        </li> */}
       </ul>
     </div>
   );
@@ -135,7 +135,7 @@ const Dashboard = () => {
             >
               Users
             </button>
-            <button
+            {/* <button
               onClick={() => setSelected("users")}
               style={{
                 padding: "10px",
@@ -156,7 +156,7 @@ const Dashboard = () => {
               }}
             >
               Waste Reports
-            </button>
+            </button> */}
           </div>
           <DashboardContent selected={selected} />
         </div>

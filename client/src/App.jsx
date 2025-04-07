@@ -43,7 +43,7 @@ function App() {
         <Route path="/publications" element={<Publications />} />
         <Route path="/innovations" element={<Innovations />} />
         <Route path="/login" element={<Login />} />
-        {user && <Route path="/dashboard" element={<Dashboard />} />}
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <FooterLayout />
     </BrowserRouter>

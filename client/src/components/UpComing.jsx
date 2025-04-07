@@ -10,7 +10,10 @@ const UpComing = () => {
   const fetchEvents = async () => {
     try {
       const response = await customFetch.get("/event");
-      setEvents(response.data.events);
+      const futureEvents = response.data.events.filter(
+        (event) => new Date(event.eventDate) > new Date()
+      );
+      setEvents(futureEvents);
     } catch (error) {
       if (error.response) {
         console.error("Response error:", error.response.data);
@@ -105,7 +108,7 @@ const UpComing = () => {
             </button>
             {visibleEvents.map((event) => (
               <div
-                key={event.id}
+                key={event._id}
                 className="col-md-4 mb-4"
                 onClick={() => handleCardClick(event)}
                 style={{ cursor: "pointer" }}
@@ -133,6 +136,10 @@ const UpComing = () => {
                       })}
                     </p>
                     <p className="small text-muted">{event.description}</p>
+                    <p className="small text-muted">
+                      <strong>Category:</strong>{" "}
+                      {event.category?.join(", ") || "Not specified"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -159,6 +166,10 @@ const UpComing = () => {
             ></div>
             <p>
               <strong>Type:</strong> {selectedEvent.type}
+            </p>
+            <p>
+              <strong>Category:</strong>{" "}
+              {selectedEvent.category?.join(", ") || "Not specified"}
             </p>
             <p>
               <strong>Date:</strong>{" "}

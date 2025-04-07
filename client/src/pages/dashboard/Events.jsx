@@ -3,7 +3,19 @@ import customFetch from "../../utils/customFetch";
 import EventContainer from "../../components/dashboard/EventContainer";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 const Events = () => {
+  const animatedComponents = makeAnimated();
+  const categoryOptions = [
+    { value: "Forums", label: "Forums" },
+    { value: "Panel Dicussions", label: "Panel Dicussions" },
+    { value: "Fireside Chats", label: "Fireside Chats" },
+    { value: "Summits", label: "Summits" },
+    { value: "Workshops", label: "Workshops" },
+    { value: "Hackathons", label: "Hackathons" },
+  ];
+
   const [events, setEvents] = React.useState([]);
   const [eventOrganizers, setEventOrganizers] = React.useState([]);
 
@@ -89,6 +101,7 @@ const Events = () => {
         formData.append("image", image);
       }
 
+      // console.log(JSON.stringify(categories));
       const response = await customFetch.post("/event", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
@@ -141,7 +154,7 @@ const Events = () => {
           Create Event
         </button>
       </div>
-      <EventContainer events={events} />
+      <EventContainer events={events} fetchEvents={fetchEvents} />;
       {showCreateModal && (
         <Modal
           show={showCreateModal}
@@ -233,14 +246,27 @@ const Events = () => {
 
               <div className="form-group">
                 <label htmlFor="eventType">Type</label>
-                <input
-                  type="text"
+                <select
                   className="form-control"
                   id="eventType"
                   value={type}
                   onChange={(e) => setType(e.target.value)}
                   required
-                />
+                >
+                  <option value="" disabled>
+                    Select Type
+                  </option>
+
+                  <option key="DEEP DIVE DIALOGUES" value="DEEP DIVE DIALOGUES">
+                    DEEP DIVE DIALOGUES
+                  </option>
+                  <option
+                    key=" Hackathons & Campaign-Based Events"
+                    value="Hackathons & Campaign-Based Events"
+                  >
+                    Hackathons & Campaign-Based Events
+                  </option>
+                </select>
               </div>
 
               <div className="form-group">
@@ -313,18 +339,17 @@ const Events = () => {
 
               <div className="form-group">
                 <label htmlFor="categories">Categories</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="categories"
-                  placeholder="Enter categories separated by commas"
-                  value={categories.join(", ")}
-                  onChange={(e) =>
+
+                <Select
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  isMulti
+                  onChange={(selectedOptions) => {
                     setCategories(
-                      e.target.value.split(",").map((cat) => cat.trim())
-                    )
-                  }
-                  required
+                      selectedOptions.map((option) => option.value)
+                    );
+                  }}
+                  options={categoryOptions}
                 />
               </div>
 
@@ -363,45 +388,6 @@ const Events = () => {
           </Modal.Body>
         </Modal>
       )}
-      {/* <div className="table-responsive">
-        <table className="table  table-bordered vh-100">
-          <thead className="table-header">
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Event Date</th>
-              <th>Event Time</th>
-              <th>Location</th>
-              <th>Capacity</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {events.length > 0 ? (
-              events.map((event) => {
-                const { date, time } = formatEventDate(event.eventDate);
-                return (
-                  <tr key={event._id}>
-                    <td>{event.title}</td>
-                    <td>{event.description}</td>
-                    <td>{date}</td>
-                    <td>{time}</td>
-                    <td>{event.location}</td>
-                    <td>{event.capacity}</td>
-                    <td>{event.type}</td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan="7" className="text-center">
-                  No events found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div> */}
     </div>
   );
 };

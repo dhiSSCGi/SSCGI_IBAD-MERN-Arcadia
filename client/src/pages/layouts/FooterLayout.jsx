@@ -1,51 +1,98 @@
 import React from "react";
-
 const FooterLayout = () => {
   return (
-    <footer className="bg-light">
-      <div className="container p-4">
-        <div className="row">
-          <div className="col-lg-6 col-md-12 mb-4 mb-md-0">
-            <h4 className="text-dark">Sustainability hub</h4>
-            <p>Upper Bicutan, Taguig City</p>
+    <footer
+      className=" py-5"
+      style={{ backgroundColor: "#d4edda", color: "black" }}
+    >
+      <div className="container-fluid px-6">
+        <div className="row gy-4">
+          {/* Logo and Tagline Section */}
+          <div className="col-lg-3">
+            <h2 className="fw-bold fs-4">SUSTAINABILITY HUB</h2>
+            <p className=" text-muted">Smarter Cities, Greener Communities.</p>
           </div>
-          <div className="row">
-            <div className="col-md-4">
-              <h6 className="text-dark ">Arcadia</h6>
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Voluptates esse quibusdam, repellat veritatis sed illum
-                molestiae eveniet deleniti totam iste.
-              </p>
-            </div>
-            <div className="col-md-2">
-              <a href="#" className="text-dark me-4">
-                Events
-              </a>
-            </div>
-            <div className="col-md-2">
-              <a href="#" className="text-dark me-4">
-                Privacy Policy
-              </a>
-            </div>
-            <div className="col-md-2">
-              <a href="#" className="text-dark me-4">
-                Licensing
-              </a>
-            </div>
-            <div className="col-md-2">
-              <a href="#" className="text-dark">
-                Contact
-              </a>
+        </div>
+        <div className="row gy-4">
+          <div className="col-lg-4">
+            <h3 className="fs-5 fw-semibold mb-3">About Arcadia</h3>
+            <p className=" text-muted">
+              Arcadia is a hub for sustainability, fostering innovation and
+              collaboration for a greener future. Join us in making a positive
+              impact on the planet.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="col-lg-2">
+            <h3 className="fs-5 fw-semibold mb-3">Events</h3>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <a href="#" className=" text-decoration-none text-muted">
+                  Webinars
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className=" text-decoration-none text-muted">
+                  Workshops
+                </a>
+              </li>
+              <li className="mb-2">
+                <a href="#" className=" text-decoration-none text-muted">
+                  Resources
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="col-lg-2">
+            <h3 className="fs-5 fw-semibold mb-3">Knowledge Portal</h3>
+            <p className=" text-muted mb-1">Email us at:</p>
+            <a
+              href="mailto:gsm.arcadia@gmail.com"
+              className=" text-decoration-none text-muted"
+            >
+              gsm.arcadia@gmail.com
+            </a>
+          </div>
+          <div className="col-lg-2">
+            <h3 className="fs-5 fw-semibold mb-3">Initiatives</h3>
+            <p className=" text-muted mb-1">Email us at:</p>
+            <a
+              href="mailto:gsm.arcadia@gmail.com"
+              className=" text-decoration-none text-muted"
+            >
+              gsm.arcadia@gmail.com
+            </a>
+          </div>
+          <div className="col-lg-2">
+            <h3 className="fs-5 fw-semibold mb-3">Contact Us</h3>
+            <p className=" text-muted mb-1">Email us at:</p>
+            <a
+              href="mailto:gsm.arcadia@gmail.com"
+              className=" text-decoration-none text-muted"
+            >
+              gsm.arcadia@gmail.com
+            </a>
+          </div>
+          {/* Contact Section */}
+        </div>
+
+        {/* Copyright Section */}
+        <div className="row border-top pt-3 mt-4 text-center text-dark">
+          <div className="col">
+            <div className="d-flex align-items-center justify-content-center">
+              <img
+                src="../../assets/images/logo.png"
+                alt="Arcadia Logo"
+                style={{ width: "2rem", height: "2rem" }}
+                className="footer-logo"
+              />
+              <span className=" text-muted ms-2">
+                © 2025 Arcadia. All rights reserved.
+              </span>
             </div>
           </div>
         </div>
-      </div>
-      <div className="text-center p-3 bg-dark border-top text-white">
-        © 2025-
-        <a href="#" className="text-white">
-          Arcadia
-        </a>
       </div>
     </footer>
   );
