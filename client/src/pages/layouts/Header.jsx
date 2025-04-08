@@ -78,8 +78,15 @@ const Header = ({ user, setUser }) => {
                 <Nav.Link
                   href="#"
                   onClick={handleLogout}
-                  className="btn login-btn"
+                  className="btn login-btn d-flex align-items-center gap-2"
                 >
+                  <img
+                    src={user?.avatar || "../../assets/images/user.png"}
+                    alt="User"
+                    width="20"
+                    height="20"
+                    className="rounded-circle"
+                  />
                   Logout
                 </Nav.Link>
               </>

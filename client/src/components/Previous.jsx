@@ -10,7 +10,7 @@ const Previous = () => {
       const pastEvents = response.data.events.filter(
         (event) => new Date(event.eventDate) < new Date()
       );
-      setEvents(pastEvents);
+      setEvents(pastEvents.slice(0, 3));
     } catch (error) {
       if (error.response) {
         console.error("Response error:", error.response.data);

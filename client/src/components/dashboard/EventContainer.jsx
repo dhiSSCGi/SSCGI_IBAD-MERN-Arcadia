@@ -384,13 +384,17 @@ const EventCard = ({ event, fetchEvents }) => {
 const EventContainer = ({ events, fetchEvents }) => {
   return (
     <div className="container-fluid ">
-      <div className="row g-3">
-        {events.map((event, index) => (
-          <div key={index} className="col-md-4">
-            <EventCard event={event} fetchEvents={fetchEvents} />
-          </div>
-        ))}
-      </div>
+      {events.length === 0 ? (
+        <p className="text-center">No events available.</p>
+      ) : (
+        <div className="row g-3">
+          {events.map((event, index) => (
+            <div key={index} className="col-md-4">
+              <EventCard event={event} fetchEvents={fetchEvents} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -11,7 +11,7 @@ const UpComing = () => {
     try {
       const response = await customFetch.get("/event");
       const futureEvents = response.data.events.filter(
-        (event) => new Date(event.eventDate) > new Date()
+        (event) => new Date(event.registrationStart) > new Date()
       );
       setEvents(futureEvents);
     } catch (error) {
