@@ -1,6 +1,6 @@
 /* Section hero */
 .section-hero {
-  background-color: #e5f7dd;
+  background-color: #3f6d2c;
   padding: 4rem 0 3.2rem 0;
 }
 
@@ -60,7 +60,7 @@
 
 /* section key */
 .section-key {
-  background-color: #e5f7dd;
+  background-color: #3f6d2c;
   padding: 2.8rem 0 2.8rem 0;
 }
 .key-card {
@@ -70,7 +70,6 @@
   padding: 1rem;
   height: 100%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -120,7 +119,7 @@
 .key-text {
   font-size: 1rem;
   line-height: 1.3;
-  color: #5d6778;
+  color: #2d3138;
   margin-bottom: 1.5rem;
 }
 
@@ -163,7 +162,7 @@
 
 .section-about {
   padding: 4.8rem 0 3.2rem 0;
-  background-color: #e5f7dd;
+  background-color: #3f6d2c;
 }
 
 .about-text {
@@ -173,7 +172,7 @@
 .highlight-title {
   font-weight: 700;
 
-  color: #3f6d2c;
+  color: #92ff65;
 }
 
 .about-paragraphs {
@@ -238,7 +237,7 @@
 
 .event-card {
   background: rgba(255, 255, 255, 0.75);
-  background: linear-gradient(45deg, #7ed957, #adfbd1);
+  background: linear-gradient(45deg, #b6ee9e, #e5f7de);
   padding: 1rem;
   border-radius: 5px;
 }
@@ -250,7 +249,7 @@
 /* upcoming events */
 .section-upcoming {
   padding: 3.2rem 0 3.2rem 0;
-  background-color: #e5f7dd;
+  background-color: #3f6d2c;
 }
 
 /* previous events */
@@ -368,7 +367,8 @@
 /* Sidebar Styling */
 .sidebar {
   width: 20rem;
-  background: #e5f7dd;
+  border-top: 1px solid white;
+  background: #3f6d2c;
   padding: 1rem;
 
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
@@ -389,7 +389,8 @@
   padding: 0.8rem;
   text-align: center;
   font-size: 1rem;
-  background-color: #d4edda;
+  background-color: #7ed957;
+  color: #000;
   margin: 5px 0;
   border-radius: 4px;
   cursor: pointer;
@@ -666,4 +667,57 @@
 .event-card-btn:active {
   background-color: #5da944;
   transform: translateY(0);
+}
+
+.month_default_event {
+  overflow: hidden;
+  border-radius: 15px;
+}
+.month_default_event_inner {
+  background: #636363;
+  border-color: #777777;
+  color: #fff;
+  padding-left: 35px;
+  border-radius: 15px;
+}
+
+.month_default_event_bar {
+  left: 0px;
+  width: 30px;
+}
+.month_default_event_bar_inner {
+  background: #888888;
+  border-radius: 15px;
+  width: 30px;
+}
+
+/* context menu icons */
+.icon:before {
+  position: absolute;
+  left: 0px;
+  margin-left: 8px;
+  margin-top: 3px;
+  width: 14px;
+  height: 14px;
+  content: "";
+}
+
+.icon-blue:before {
+  background-color: #3c78d8;
+}
+.icon-green:before {
+  background-color: #6aa84f;
+}
+.icon-yellow:before {
+  background-color: #e69138;
+}
+.icon-red:before {
+  background-color: #cc0000;
+}
+
+.partners-image {
+  width: 100%;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 5px;
 }

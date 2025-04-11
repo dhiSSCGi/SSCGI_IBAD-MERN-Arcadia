@@ -5,7 +5,6 @@ import day from "dayjs";
 import cloudinary from "cloudinary";
 import { promises as fs } from "fs";
 import XLSX from "xlsx";
-
 export const createEvent = async (req, res) => {
   try {
     const {

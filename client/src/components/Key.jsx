@@ -9,8 +9,8 @@ const Key = () => {
   return (
     <section className="section-key">
       <div className="container-fluid px-6">
-        <h3 className="heading-tertiary">Three Key Components</h3>
-        <p className="key-text">
+        <h3 className="heading-tertiary text-white">Three Key Components</h3>
+        <p className="title-p text-white">
           Arcadia’s methodology revolves around fostering a continuous cycle of
           dialogue, knowledge sharing, and innovation, to empower stakeholders
           and drive meaningful sustainability outcomes. Our key pillars include:

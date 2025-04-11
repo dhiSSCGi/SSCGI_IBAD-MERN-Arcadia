@@ -13,7 +13,7 @@ const Publications = () => {
         <div className="container-fluid px-6">
           <div className="row margin-bottom">
             <div className="col-md-6">
-              <div className="event-card">
+              <div className="card focus-card">
                 <div className="impact-text-box">
                   <h3 className="key-title"> Market Analysis</h3>
                   <p className="impact-description">
@@ -50,7 +50,7 @@ const Publications = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="event-card">
+              <div className="card focus-card">
                 <div className="impact-img-box">
                   <div className="impact-text-box">
                     <h3 className="key-title">Position Papers</h3>
@@ -73,7 +73,7 @@ const Publications = () => {
           </div>
           <div className="row margin-bottom">
             <div className="col-md-6">
-              <div className="event-card">
+              <div className="card focus-card">
                 <div className="impact-text-box">
                   <h3 className="key-title"> Waste Reports / Manifestos</h3>
                   <p className="impact-description">

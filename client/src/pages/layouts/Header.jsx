@@ -38,8 +38,13 @@ const Header = ({ user, setUser }) => {
   };
 
   return (
-    <Navbar collapseOnSelect expand="sm" className="nav-bg">
-      <Container className="nav-container sticky-top">
+    <Navbar
+      collapseOnSelect
+      expand="sm"
+      className="nav-bg sticky-top"
+      style={{ position: "sticky", top: 0, zIndex: 1030 }}
+    >
+      <Container fluid className="nav-container">
         <div className="d-flex align-items-center">
           <Navbar.Brand href="/">
             <img
@@ -78,7 +83,7 @@ const Header = ({ user, setUser }) => {
                 <Nav.Link
                   href="#"
                   onClick={handleLogout}
-                  className="btn login-btn d-flex align-items-center gap-2"
+                  className="btn main-btn d-flex align-items-center gap-2"
                 >
                   <img
                     src={user?.avatar || "../../assets/images/user.png"}

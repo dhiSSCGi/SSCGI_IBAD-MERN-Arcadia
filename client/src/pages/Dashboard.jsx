@@ -3,11 +3,13 @@ import Users from "./dashboard/Users";
 import Events from "./dashboard/Events";
 import { redirect } from "react-router-dom";
 import customFetch from "../utils/customFetch";
+import Calendar from "../components/dashboard/Calendar";
+import Solutions from "./dashboard/Solutions";
 const Sidebar = ({ onSelect }) => {
   return (
     <div className="sidebar">
       <h3
-        className="sidebar-title"
+        className="sidebar-title text-white"
         style={{ fontSize: "18px", marginBottom: "10px" }}
       >
         Menu
@@ -34,6 +36,30 @@ const Sidebar = ({ onSelect }) => {
           }}
         >
           Users
+        </li>
+
+        <li
+          onClick={() => onSelect("calendar")}
+          className="menu-item"
+          style={{
+            padding: "10px",
+            cursor: "pointer",
+            borderBottom: "1px solid #3f6d2c",
+          }}
+        >
+          Events Calendar
+        </li>
+
+        <li
+          onClick={() => onSelect("solution")}
+          className="menu-item"
+          style={{
+            padding: "10px",
+            cursor: "pointer",
+            borderBottom: "1px solid #3f6d2c",
+          }}
+        >
+          Partners
         </li>
         {/* <li
           onClick={() => onSelect("users")}
@@ -67,6 +93,8 @@ const DashboardContent = ({ selected }) => {
     <div className="container-fluid">
       {selected === "events" && <Events />}
       {selected === "users" && <Users />}
+      {selected === "calendar" && <Calendar />}
+      {selected === "solution" && <Solutions />}
     </div>
   );
 };
@@ -134,6 +162,28 @@ const Dashboard = () => {
               }}
             >
               Users
+            </button>
+            <button
+              onClick={() => setSelected("calendar")}
+              style={{
+                padding: "10px",
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+              }}
+            >
+              Event Calendar
+            </button>
+            <button
+              onClick={() => setSelected("solution")}
+              style={{
+                padding: "10px",
+                cursor: "pointer",
+                background: "none",
+                border: "none",
+              }}
+            >
+              Partners
             </button>
             {/* <button
               onClick={() => setSelected("users")}

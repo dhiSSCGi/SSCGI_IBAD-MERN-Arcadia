@@ -3,7 +3,7 @@ import LoginForm from "../components/LoginForm";
 import login from "../assets/images/login.svg";
 const Login = () => {
   return (
-    <section className="section-hero">
+    <section className="section-impact">
       <div className="container">
         <div className="login-container">
           <div className="col-sm-6">

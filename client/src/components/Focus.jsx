@@ -153,7 +153,7 @@ const Focus = () => {
           <h3 className="heading-tertiary">
             Our Focus in the Philippines Context
           </h3>
-          <p className="key-text">
+          <p className="title-p text-dark">
             Our flagship projects bring together key stakeholders to address
             pressing waste challenges through collaborative dialogue and
             innovation. By assessing on-the-ground realities and identifying

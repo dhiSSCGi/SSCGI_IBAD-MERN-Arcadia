@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  DayPilot,
+  DayPilotCalendar,
+  DayPilotMonth,
+  DayPilotNavigator,
+} from "@daypilot/daypilot-lite-react";
+import "./Calendar.css";
 import customFetch from "../../utils/customFetch";
-import EventContainer from "../../components/dashboard/EventContainer";
-import Modal from "react-bootstrap/Modal";
-import { toast } from "react-toastify";
-import Select from "react-select";
-import makeAnimated from "react-select/animated";
+import { Modal } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
+import { toast } from "react-toastify";
+const Calendar = () => {
+  const [view, setView] = useState("Month");
+  const [startDate, setStartDate] = useState(DayPilot.Date.today());
+  const [events, setEvents] = useState([]);
 
-const Events = () => {
+  const [dayView, setDayView] = useState();
+  const [weekView, setWeekView] = useState();
+  const [monthView, setMonthView] = useState();
   const categoryOptions = [
     { value: "Forums", label: "Forums" },
     { value: "Panel Dicussions", label: "Panel Dicussions" },
@@ -17,7 +27,6 @@ const Events = () => {
     { value: "Hackathons", label: "Hackathons" },
   ];
 
-  const [events, setEvents] = React.useState([]);
   const [eventOrganizers, setEventOrganizers] = React.useState([]);
 
   const [title, setTitle] = useState("");
@@ -36,49 +45,50 @@ const Events = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const formatDateToYYYYMMDD = (date) => {
+    const year = date.getYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDay().toString().padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
+  const onTimeRangeSelected = async (args) => {
+    const dp = args.control;
+    dp.clearSelection();
+
+    const formattedDate = formatDateToYYYYMMDD(args.start);
+
+    setEventDate(formattedDate);
+
+    setShowCreateModal(true);
+  };
 
   const fetchEvents = async () => {
     try {
       const response = await customFetch.get("/event");
-      setEvents(response.data.events);
+      const data = response.data.events.map((event) => ({
+        id: event._id,
+        text: event.title,
+        start: event.eventDate,
+        end: event.eventDate,
+        backColor:
+          event.type === "DEEP DIVE DIALOGUES"
+            ? "limegreen"
+            : event.type === "Hackathons & Campaign-Based Events"
+            ? "lightblue"
+            : "#d5663e",
+      }));
+
+      setEvents(data);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
   };
 
-  const fetchOrganizers = async () => {
-    try {
-      const response = await customFetch.get("/user/organizers");
-      setEventOrganizers(response.data.users);
-    } catch (error) {
-      console.error("Error fetching users:", error);
-    }
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
     fetchEvents();
     fetchOrganizers();
   }, []);
-
-  const formatEventDate = (dateString) => {
-    const eventDate = new Date(dateString);
-
-    const date = eventDate.toLocaleDateString("en-US", {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-    const time = eventDate.toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-      hour12: true,
-    });
-
-    return { date, time };
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,6 +106,7 @@ const Events = () => {
       formData.append("registrationEnd", registrationEnd);
       formData.append("registrationLink", registrationLink);
       formData.append("eventDataLink", eventData);
+
       formData.append("categories", JSON.stringify(categories));
       if (image) {
         formData.append("image", image);
@@ -118,8 +129,13 @@ const Events = () => {
     }
   };
 
-  const openCreateModal = () => {
-    setShowCreateModal(true);
+  const fetchOrganizers = async () => {
+    try {
+      const response = await customFetch.get("/user/organizers");
+      setEventOrganizers(response.data.users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
   };
 
   const closeCreateModal = () => {
@@ -142,19 +158,98 @@ const Events = () => {
     setImagePreview(null);
   };
 
-  return (
-    <div className="container-fluid p-5">
-      <div className="d-flex justify-content-between">
-        <h1 className="mb-4">Events</h1>
+  const formatEventDate = (dateString) => {
+    const eventDate = new Date(dateString);
 
-        <button
-          className="btn main-btn mb-3 text-dark"
-          onClick={openCreateModal}
-        >
-          Create Event
-        </button>
+    const date = eventDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    return date;
+  };
+  const formatDateToMonthDayYear = (date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return date.toLocaleDateString("en-US", options);
+  };
+
+  return (
+    <div className={"container-fluid p-4"}>
+      <div className="row">
+        <div className="col-md-3">
+          <div className={"container mx-0"}>
+            <DayPilotNavigator
+              selectMode={view}
+              showMonths={2}
+              skipMonths={2}
+              onTimeRangeSelected={(args) => setStartDate(args.day)}
+              events={events}
+            />
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div className={"container mx-0"}>
+            {/* <div className={"toolbar"}>
+              <div className={"toolbar-group"}>
+                <button
+                  onClick={() => setView("Day")}
+                  className={view === "Day" ? "selected" : ""}
+                >
+                  Day
+                </button>
+                <button
+                  onClick={() => setView("Week")}
+                  className={view === "Week" ? "selected" : ""}
+                >
+                  Week
+                </button>
+                <button
+                  onClick={() => setView("Month")}
+                  className={view === "Month" ? "selected" : ""}
+                >
+                  Month
+                </button>
+              </div>
+              <button
+                onClick={() => setStartDate(DayPilot.Date.today())}
+                className={"standalone"}
+              >
+                Today
+              </button>
+            </div> */}
+
+            <DayPilotCalendar
+              viewType={"Day"}
+              startDate={startDate}
+              events={events}
+              visible={view === "Day"}
+              durationBarVisible={false}
+              onTimeRangeSelected={onTimeRangeSelected}
+              controlRef={setDayView}
+            />
+            <DayPilotCalendar
+              viewType={"Week"}
+              startDate={startDate}
+              events={events}
+              visible={view === "Week"}
+              durationBarVisible={false}
+              onTimeRangeSelected={onTimeRangeSelected}
+              controlRef={setWeekView}
+            />
+            <DayPilotMonth
+              startDate={startDate}
+              events={events}
+              visible={view === "Month"}
+              eventBarVisible={false}
+              onTimeRangeSelected={onTimeRangeSelected}
+              controlRef={setMonthView}
+            />
+          </div>
+        </div>
       </div>
-      <EventContainer events={events} fetchEvents={fetchEvents} />;
+
       {showCreateModal && (
         <Modal
           show={showCreateModal}
@@ -163,11 +258,11 @@ const Events = () => {
           aria-labelledby="contained-modal-title-vcenter"
           centered
           backdrop="static"
-          keyboard={false} // Prevent closing modal with keyboard ESC
+          keyboard={false}
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              Create Event
+              Create Event on {formatEventDate(eventDate)}
             </Modal.Title>
           </Modal.Header>
 
@@ -197,7 +292,7 @@ const Events = () => {
                   required
                 />
               </div>
-
+              {/* 
               <div className="form-group">
                 <label htmlFor="eventDate">Event Date</label>
                 <input
@@ -208,7 +303,7 @@ const Events = () => {
                   onChange={(e) => setEventDate(e.target.value)}
                   required
                 />
-              </div>
+              </div> */}
 
               <div className="form-group">
                 <label htmlFor="eventLocation">Location</label>
@@ -392,5 +487,4 @@ const Events = () => {
     </div>
   );
 };
-
-export default Events;
+export default Calendar;

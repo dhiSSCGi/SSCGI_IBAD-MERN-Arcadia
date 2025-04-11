@@ -3,10 +3,19 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import customFetch from "../../utils/customFetch.js";
 import { toast } from "react-toastify";
-
+import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 const EventCard = ({ event, fetchEvents }) => {
   const [showModal, setShowModal] = useState(false);
   const [file, setFile] = useState(null);
+  const categoryOptions = [
+    { value: "Forums", label: "Forums" },
+    { value: "Panel Dicussions", label: "Panel Dicussions" },
+    { value: "Fireside Chats", label: "Fireside Chats" },
+    { value: "Summits", label: "Summits" },
+    { value: "Workshops", label: "Workshops" },
+    { value: "Hackathons", label: "Hackathons" },
+  ];
 
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
@@ -74,8 +83,8 @@ const EventCard = ({ event, fetchEvents }) => {
     location: event.location,
     capacity: event.capacity,
     image: event.image,
+    category: event.category || [],
   });
-
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -90,7 +99,10 @@ const EventCard = ({ event, fetchEvents }) => {
       }));
     }
   };
-  const handleUpdateModalShow = () => setUpdateModalShow(true);
+  const handleUpdateModalShow = (e) => {
+    e.stopPropagation();
+    setUpdateModalShow(true);
+  };
 
   const handleUpdateModalClose = () => setUpdateModalShow(false);
 
@@ -124,42 +136,11 @@ const EventCard = ({ event, fetchEvents }) => {
 
   return (
     <>
-      <div className="card event-card h-100 position-relative">
-        <button
-          className="btn btn-danger btn-sm position-absolute top-0 end-0 "
-          onClick={() => {
-            toast.info(
-              <div>
-                <p>Are you sure you want to delete this event?</p>
-                <div className="d-flex justify-content-center gap-2">
-                  <button
-                    className="btn btn-danger btn-sm"
-                    onClick={() => {
-                      handleDeleteEvent(event._id);
-                      toast.dismiss();
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    className="btn btn-secondary btn-sm"
-                    onClick={() => toast.dismiss()}
-                  >
-                    No
-                  </button>
-                </div>
-              </div>,
-              {
-                position: "top-center",
-                autoClose: false,
-                closeOnClick: false,
-                draggable: false,
-              }
-            );
-          }}
-        >
-          ✕
-        </button>
+      <div
+        className="card event-card h-100 position-relative"
+        onClick={handleShowModal}
+        style={{ cursor: "pointer" }}
+      >
         <img
           src={event.image}
           alt={event.title}
@@ -179,20 +160,16 @@ const EventCard = ({ event, fetchEvents }) => {
             <strong>Participants:</strong> {event.participants} /{" "}
             {event.capacity}
           </p>
+          <p className="card-text">
+            <strong>Categories:</strong> {event.category.join(", ")}
+          </p>
           <div className="mt-3">
             <div className="event-card-btns">
               <div className="col">
-                <button
-                  onClick={handleShowModal}
-                  className="btn btn-primary event-card-btn"
-                >
-                  View Details
-                </button>
-              </div>
-              <div className="col">
                 <a
                   href={event.eventDataLink}
-                  className="btn-secondary event-card-btn"
+                  className="btn main-btn event-card-btn"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   View Participants
                 </a>
@@ -200,9 +177,48 @@ const EventCard = ({ event, fetchEvents }) => {
               <div className="col">
                 <button
                   onClick={handleUpdateModalShow}
-                  className="btn btn-warning event-card-btn"
+                  className="btn main-btn event-card-btn"
                 >
                   Update
+                </button>
+              </div>
+              <div className="col">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toast.info(
+                      <div>
+                        <p>Are you sure you want to delete this event?</p>
+                        <div className="d-flex justify-content-center gap-2">
+                          <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => {
+                              handleDeleteEvent(event._id);
+                              toast.dismiss();
+                            }}
+                          >
+                            Yes
+                          </button>
+                          <button
+                            className="btn btn-secondary btn-sm"
+                            onClick={() => toast.dismiss()}
+                          >
+                            No
+                          </button>
+                        </div>
+                      </div>,
+                      {
+                        position: "top-center",
+                        autoClose: false,
+                        closeOnClick: false,
+                        draggable: false,
+                      }
+                    );
+                  }}
+                  className="btn main-btn event-card-btn"
+                >
+                  Delete
                 </button>
               </div>
             </div>
@@ -237,6 +253,9 @@ const EventCard = ({ event, fetchEvents }) => {
           <p>
             <strong>Participants:</strong> {event.participants} /{" "}
             {event.capacity}
+          </p>
+          <p>
+            <strong>Categories:</strong> {event.category.join(", ")}
           </p>
         </Modal.Body>
         <Modal.Footer>
@@ -343,6 +362,24 @@ const EventCard = ({ event, fetchEvents }) => {
                 name="capacity"
                 value={updatedEvent.capacity}
                 onChange={handleInputChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="categories">CATEGORIES</label>
+
+              <CreatableSelect
+                isMulti
+                options={categoryOptions}
+                value={updatedEvent.category.map((cat) => ({
+                  value: cat,
+                  label: cat,
+                }))}
+                onChange={(newValue) =>
+                  setUpdatedEvent((prev) => ({
+                    ...prev,
+                    category: newValue.map((item) => item.value),
+                  }))
+                }
               />
             </div>
             <div className="mb-3">

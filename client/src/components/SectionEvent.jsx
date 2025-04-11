@@ -5,7 +5,7 @@ const SectionEvent = () => {
     <section className="section-events">
       <div className="container-fluid px-6">
         <h3 className="heading-tertiary">EVENTS & COLLABORATION</h3>
-        <p className="key-text">
+        <p className="title-p text-dark">
           Comprehensive events including forums, panel discussions, deep-dive
           dialogues, and hackathons to foster discourse and drive actionable
           sustainability solutions.
@@ -14,9 +14,11 @@ const SectionEvent = () => {
       <div className="container-fluid px-6">
         <div className="row margin-bottom d-flex align-items-center flex-column-reverse flex-md-row">
           <div className="col-md-7">
-            <div className="event-card">
+            <div className="card focus-card">
               <div className="impact-text-box">
-                <h3 className="heading-fourth">DEEP DIVE DIALOGUES</h3>
+                <h3 className="heading-fourth ">
+                  <strong>DEEP DIVE DIALOGUES</strong>
+                </h3>
                 <p className="impact-description">
                   Our Deep Dive Dialogue sessions are structured discussions
                   designed to encourage stakeholders to share their insights and
@@ -50,11 +52,11 @@ const SectionEvent = () => {
             </div>
           </div>
           <div className="col-md-7">
-            <div className="event-card">
+            <div className="card focus-card">
               <div className="impact-img-box">
                 <div className="impact-text-box">
                   <h3 className="heading-fourth">
-                    Hackathons & Campaign-Based Events
+                    <strong>Hackathons & Campaign-Based Events</strong>
                   </h3>
                   <p className="impact-description">
                     Arcadia organizes hackathons and campaign-driven events
