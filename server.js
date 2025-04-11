@@ -101,7 +101,7 @@ app.post("/api/v1/send-email", (req, res) => {
     <body>
       <div class="email-container">
         <div style="text-align: center; margin-bottom: 20px;">
-          <img src="<img src="${logoSrc}" alt="Company Logo" style="max-width: 150px;" />
+         <img src="${logoSrc}" alt="Company Logo" style="max-width: 150px;" />
         </div>
         <h2>New Contact Form Submission</h2>
         
