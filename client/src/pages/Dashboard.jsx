@@ -6,6 +6,8 @@ import customFetch from "../utils/customFetch";
 import Calendar from "../components/dashboard/Calendar";
 import Solutions from "./dashboard/Solutions";
 const Sidebar = ({ onSelect }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   return (
     <div className="sidebar">
       <h3
@@ -26,17 +28,20 @@ const Sidebar = ({ onSelect }) => {
         >
           Events
         </li>
-        <li
-          onClick={() => onSelect("users")}
-          className="menu-item"
-          style={{
-            padding: "10px",
-            cursor: "pointer",
-            borderBottom: "1px solid #3f6d2c",
-          }}
-        >
-          Users
-        </li>
+
+        {user?.role === "admin" && (
+          <li
+            onClick={() => onSelect("users")}
+            className="menu-item"
+            style={{
+              padding: "10px",
+              cursor: "pointer",
+              borderBottom: "1px solid #3f6d2c",
+            }}
+          >
+            Users
+          </li>
+        )}
 
         <li
           onClick={() => onSelect("calendar")}
@@ -50,39 +55,19 @@ const Sidebar = ({ onSelect }) => {
           Events Calendar
         </li>
 
-        <li
-          onClick={() => onSelect("solution")}
-          className="menu-item"
-          style={{
-            padding: "10px",
-            cursor: "pointer",
-            borderBottom: "1px solid #3f6d2c",
-          }}
-        >
-          Partners
-        </li>
-        {/* <li
-          onClick={() => onSelect("users")}
-          className="menu-item"
-          style={{
-            padding: "10px",
-            cursor: "pointer",
-            borderBottom: "1px solid #3f6d2c",
-          }}
-        >
-          Opinion Editorials
-        </li>
-        <li
-          onClick={() => onSelect("users")}
-          className="menu-item"
-          style={{
-            padding: "10px",
-            cursor: "pointer",
-            borderBottom: "1px solid #3f6d2c",
-          }}
-        >
-          Waste Reports
-        </li> */}
+        {user?.role === "admin" && (
+          <li
+            onClick={() => onSelect("solution")}
+            className="menu-item"
+            style={{
+              padding: "10px",
+              cursor: "pointer",
+              borderBottom: "1px solid #3f6d2c",
+            }}
+          >
+            Partners
+          </li>
+        )}
       </ul>
     </div>
   );
@@ -100,10 +85,10 @@ const DashboardContent = ({ selected }) => {
 };
 
 const Dashboard = () => {
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user"));
   const getCurrentUser = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(localStorage.getItem("user"));
       if (!token || !user || token !== user.loginToken) {
         window.location.href = "/";
         return;
@@ -152,17 +137,20 @@ const Dashboard = () => {
             >
               Events
             </button>
-            <button
-              onClick={() => setSelected("users")}
-              style={{
-                padding: "10px",
-                cursor: "pointer",
-                background: "none",
-                border: "none",
-              }}
-            >
-              Users
-            </button>
+
+            {user?.role === "admin" && (
+              <button
+                onClick={() => setSelected("users")}
+                style={{
+                  padding: "10px",
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                }}
+              >
+                Users
+              </button>
+            )}
             <button
               onClick={() => setSelected("calendar")}
               style={{
@@ -174,17 +162,20 @@ const Dashboard = () => {
             >
               Event Calendar
             </button>
-            <button
-              onClick={() => setSelected("solution")}
-              style={{
-                padding: "10px",
-                cursor: "pointer",
-                background: "none",
-                border: "none",
-              }}
-            >
-              Partners
-            </button>
+
+            {user?.role === "admin" && (
+              <button
+                onClick={() => setSelected("solution")}
+                style={{
+                  padding: "10px",
+                  cursor: "pointer",
+                  background: "none",
+                  border: "none",
+                }}
+              >
+                Partners
+              </button>
+            )}
             {/* <button
               onClick={() => setSelected("users")}
               style={{

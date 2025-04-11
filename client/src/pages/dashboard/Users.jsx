@@ -12,6 +12,8 @@ const Users = () => {
   const [location, setLocation] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchUsers = async () => {
@@ -31,10 +33,6 @@ const Users = () => {
 
   const openCreateModal = () => {
     setShowCreateModal(true);
-  };
-
-  const closeCreateModal = () => {
-    setShowCreateModal(false);
   };
 
   const handleSubmit = async (e) => {
@@ -78,6 +76,27 @@ const Users = () => {
       alert("Failed to delete user. Please try again.");
     }
   }
+  const resetFormData = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
+    setLocation("");
+    setContactNumber("");
+    setImage(null);
+    setImagePreview(null);
+    setSelectedUser(null);
+  };
+
+  const closeUpdateModal = () => {
+    setShowUpdateModal(false);
+    resetFormData();
+  };
+
+  const closeCreateModal = () => {
+    setShowCreateModal(false);
+    resetFormData();
+  };
 
   const handleImageChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -115,14 +134,7 @@ const Users = () => {
 
       toast.success("User updated successfully!");
       fetchUsers();
-      setShowUpdateModal(false);
-      setFirstName("");
-      setLastName("");
-      setEmail("");
-      setLocation("");
-      setContactNumber("");
-      setImage(null);
-      setSelectedUser(null);
+      closeUpdateModal();
     } catch (error) {
       toast.error("Error updating user");
       console.error("Error updating user:", error);
@@ -177,6 +189,7 @@ const Users = () => {
                               setLocation(user.location || "");
                               setContactNumber(user.contactNumber || "");
                               setImage(user.avatar || null);
+                              setImagePreview(user.avatar || null);
 
                               setShowUpdateModal(true);
                             }}
@@ -339,13 +352,19 @@ const Users = () => {
                   type="file"
                   className="form-control"
                   id="image"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setImage(file);
+                      setImagePreview(URL.createObjectURL(file));
+                    }
+                  }}
                 />
               </div>
               {image && (
                 <div className="mb-3">
                   <img
-                    src={URL.createObjectURL(image)}
+                    src={imagePreview}
                     alt="Preview"
                     className="img-thumbnail"
                     style={{ maxWidth: "200px", maxHeight: "200px" }}
@@ -363,7 +382,7 @@ const Users = () => {
       {showUpdateModal && (
         <Modal
           show={showUpdateModal}
-          onHide={() => setShowUpdateModal(false)}
+          onHide={closeUpdateModal}
           size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
@@ -446,11 +465,17 @@ const Users = () => {
                   id="image"
                   name="image"
                   accept="image/*"
-                  onChange={(e) => setImage(e.target.files[0])}
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+                    if (file) {
+                      setImage(file);
+                      setImagePreview(URL.createObjectURL(file));
+                    }
+                  }}
                 />
                 {image && (
                   <img
-                    src={URL.createObjectURL(image)}
+                    src={imagePreview}
                     alt="Preview"
                     className="img-fluid mt-3 rounded shadow-sm"
                     style={{ maxHeight: "200px", objectFit: "cover" }}

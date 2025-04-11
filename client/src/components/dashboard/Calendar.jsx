@@ -11,6 +11,8 @@ import { Modal } from "react-bootstrap";
 import CreatableSelect from "react-select/creatable";
 import { toast } from "react-toastify";
 const Calendar = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
   const [view, setView] = useState("Month");
   const [startDate, setStartDate] = useState(DayPilot.Date.today());
   const [events, setEvents] = useState([]);
@@ -66,7 +68,15 @@ const Calendar = () => {
   const fetchEvents = async () => {
     try {
       const response = await customFetch.get("/event");
-      const data = response.data.events.map((event) => ({
+
+      const allEvents = response.data.events;
+
+      const myEvents =
+        user.role === "admin"
+          ? allEvents
+          : allEvents.filter((event) => event.organizer === user._id);
+
+      const data = myEvents.map((event) => ({
         id: event._id,
         text: event.title,
         start: event.eventDate,

@@ -8,6 +8,7 @@ import makeAnimated from "react-select/animated";
 import CreatableSelect from "react-select/creatable";
 
 const Events = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
   const categoryOptions = [
     { value: "Forums", label: "Forums" },
     { value: "Panel Dicussions", label: "Panel Dicussions" },
@@ -40,7 +41,14 @@ const Events = () => {
   const fetchEvents = async () => {
     try {
       const response = await customFetch.get("/event");
-      setEvents(response.data.events);
+      const allEvents = response.data.events;
+
+      const myEvents =
+        user.role === "admin"
+          ? allEvents
+          : allEvents.filter((event) => event.organizer === user._id);
+
+      setEvents(myEvents);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
