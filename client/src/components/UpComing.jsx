@@ -11,7 +11,8 @@ const UpComing = () => {
     try {
       const response = await customFetch.get("/event");
       const futureEvents = response.data.events.filter(
-        (event) => new Date(event.registrationStart) > new Date()
+        (event) =>
+          !event.isDeleted && new Date(event.registrationStart) > new Date()
       );
       setEvents(futureEvents);
     } catch (error) {
@@ -106,44 +107,50 @@ const UpComing = () => {
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>
-            {visibleEvents.map((event) => (
-              <div
-                key={event._id}
-                className="col-md-4 mb-4"
-                onClick={() => handleCardClick(event)}
-                style={{ cursor: "pointer" }}
-              >
-                <div className="card shadow-sm h-100">
-                  <div
-                    className="bg-secondary bg-opacity-25 w-100"
-                    style={{
-                      aspectRatio: "1/1",
-                      backgroundImage: `url(${event.image})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  ></div>
-                  <div className="card-body">
-                    <p className="small text-primary fw-medium mb-1">
-                      {event.type}
-                    </p>
-                    <p className="small fw-medium mb-1">{event.title}</p>
-                    <p className="small text-muted">
-                      {new Date(event.eventDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </p>
-                    <p className="small text-muted">{event.description}</p>
-                    <p className="small text-muted">
-                      <strong>Category:</strong>{" "}
-                      {event.category?.join(", ") || "Not specified"}
-                    </p>
+            {visibleEvents.length > 0 ? (
+              visibleEvents.map((event) => (
+                <div
+                  key={event._id}
+                  className="col-md-4 mb-4"
+                  onClick={() => handleCardClick(event)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <div className="card shadow-sm h-100">
+                    <div
+                      className="bg-secondary bg-opacity-25 w-100"
+                      style={{
+                        aspectRatio: "1/1",
+                        backgroundImage: `url(${event.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
+                    <div className="card-body">
+                      <p className="small text-primary fw-medium mb-1">
+                        {event.type}
+                      </p>
+                      <p className="small fw-medium mb-1">{event.title}</p>
+                      <p className="small text-muted">
+                        {new Date(event.eventDate).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        })}
+                      </p>
+                      <p className="small text-muted">{event.description}</p>
+                      <p className="small text-muted">
+                        <strong>Category:</strong>{" "}
+                        {event.category?.join(", ") || "Not specified"}
+                      </p>
+                    </div>
                   </div>
                 </div>
+              ))
+            ) : (
+              <div className="text-center mb-4">
+                <h4>No upcoming events</h4>
               </div>
-            ))}
+            )}
           </div>
         </div>
       </section>

@@ -125,12 +125,23 @@ const EventCard = ({ event, fetchEvents }) => {
 
   async function handleDeleteEvent(eventId) {
     try {
-      await customFetch.delete(`/event/delete/${eventId}`);
+      await customFetch.patch(`/event/delete/${eventId}`);
       toast.success("Event deleted successfully!");
       fetchEvents();
     } catch (error) {
       console.error("Error deleting event:", error);
       alert("Failed to delete event. Please try again.");
+    }
+  }
+
+  async function handleRestoreEvent(eventId) {
+    try {
+      await customFetch.patch(`/event/restore/${eventId}`);
+      toast.success("Event restored successfully!");
+      fetchEvents();
+    } catch (error) {
+      console.error("Error restoring event:", error);
+      alert("Failed to restoring event. Please try again.");
     }
   }
 
@@ -183,43 +194,83 @@ const EventCard = ({ event, fetchEvents }) => {
                 </button>
               </div>
               <div className="col">
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toast.info(
-                      <div>
-                        <p>Are you sure you want to delete this event?</p>
-                        <div className="d-flex justify-content-center gap-2">
-                          <button
-                            className="btn btn-danger btn-sm"
-                            onClick={() => {
-                              handleDeleteEvent(event._id);
-                              toast.dismiss();
-                            }}
-                          >
-                            Yes
-                          </button>
-                          <button
-                            className="btn btn-secondary btn-sm"
-                            onClick={() => toast.dismiss()}
-                          >
-                            No
-                          </button>
-                        </div>
-                      </div>,
-                      {
-                        position: "top-center",
-                        autoClose: false,
-                        closeOnClick: false,
-                        draggable: false,
-                      }
-                    );
-                  }}
-                  className="btn main-btn event-card-btn"
-                >
-                  Delete
-                </button>
+                {event.isDeleted ? (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toast.info(
+                        <div>
+                          <p>Are you sure you want to restore this event?</p>
+                          <div className="d-flex justify-content-center gap-2">
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() => {
+                                handleRestoreEvent(event._id);
+                                toast.dismiss();
+                              }}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              onClick={() => toast.dismiss()}
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>,
+                        {
+                          position: "top-center",
+                          autoClose: false,
+                          closeOnClick: false,
+                          draggable: false,
+                        }
+                      );
+                    }}
+                    className="btn btn-outline-success event-card-btn"
+                  >
+                    Restore
+                  </button>
+                ) : (
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toast.info(
+                        <div>
+                          <p>Are you sure you want to delete this event?</p>
+                          <div className="d-flex justify-content-center gap-2">
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() => {
+                                handleDeleteEvent(event._id);
+                                toast.dismiss();
+                              }}
+                            >
+                              Yes
+                            </button>
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              onClick={() => toast.dismiss()}
+                            >
+                              No
+                            </button>
+                          </div>
+                        </div>,
+                        {
+                          position: "top-center",
+                          autoClose: false,
+                          closeOnClick: false,
+                          draggable: false,
+                        }
+                      );
+                    }}
+                    className="btn main-btn event-card-btn"
+                  >
+                    Delete
+                  </button>
+                )}
               </div>
             </div>
           </div>

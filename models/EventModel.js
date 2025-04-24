@@ -22,6 +22,7 @@ const EventSchema = new mongoose.Schema(
     eventDataLink: { type: String },
     image: { type: String },
     imageId: { type: String },
+    isDeleted: { type: Boolean, default: false },
   },
   {
     timestamps: true,

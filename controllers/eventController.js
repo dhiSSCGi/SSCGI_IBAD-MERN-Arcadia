@@ -143,24 +143,48 @@ export const updateEvent = async (req, res) => {
     res.status(500).json({ message: "Error updating event" });
   }
 };
-
 export const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const event = await Event.findByIdAndDelete(id);
-
+    const event = await Event.findById(id);
     if (!event) {
-      return res.status(404).json({ message: "Event not found" });
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Event not found" });
     }
 
-    if (event.imageId) {
-      await cloudinary.v2.uploader.destroy(event.imageId);
-    }
+    event.isDeleted = true;
+    await event.save();
 
-    res.status(StatusCodes.OK).json({ message: "Event deleted successfully" });
+    res.status(StatusCodes.OK).json({ message: "Event marked as deleted" });
   } catch (error) {
     console.error("Error deleting event:", error);
-    res.status(500).json({ message: "Error deleting event" });
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Error deleting event" });
+  }
+};
+
+export const restoreEvent = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const event = await Event.findById(id);
+    if (!event) {
+      return res
+        .status(StatusCodes.NOT_FOUND)
+        .json({ message: "Event not found" });
+    }
+
+    event.isDeleted = false;
+    await event.save();
+
+    res.status(StatusCodes.OK).json({ message: "Event restored successfully" });
+  } catch (error) {
+    console.error("Error restoring event:", error);
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: "Error restoring event" });
   }
 };

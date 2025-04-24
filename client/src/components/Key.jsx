@@ -17,8 +17,8 @@ const Key = () => {
         </p>
       </div>
       <div className="container-fluid px-6">
-        <div className="row">
-          <div className="col-md-4">
+        <div className="row g-2">
+          <div className="col-md-4 ">
             <div className="key-card">
               <div className="key-header text-center">
                 <div className="icon-container">

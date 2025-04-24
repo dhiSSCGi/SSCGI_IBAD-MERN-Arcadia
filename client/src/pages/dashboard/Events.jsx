@@ -37,20 +37,40 @@ const Events = () => {
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
-
+  const [eventBtnDisplayed, setEventBtnDisplayed] = useState("Deleted Events");
+  const [allEvents, setAllEvents] = useState([]);
   const fetchEvents = async () => {
     try {
       const response = await customFetch.get("/event");
-      const allEvents = response.data.events;
+      const data = response.data.events;
 
-      const myEvents =
+      const filteredByRole =
         user.role === "admin"
-          ? allEvents
-          : allEvents.filter((event) => event.organizer === user._id);
+          ? data
+          : data.filter((event) => event.organizer === user._id);
 
-      setEvents(myEvents);
+      setAllEvents(filteredByRole);
+
+      // Respect current toggle state
+      if (eventBtnDisplayed === "Deleted Events") {
+        setEvents(filteredByRole.filter((event) => !event.isDeleted));
+      } else {
+        setEvents(filteredByRole.filter((event) => event.isDeleted));
+      }
     } catch (error) {
       console.error("Error fetching events:", error);
+    }
+  };
+
+  const changeEvents = () => {
+    if (eventBtnDisplayed === "Deleted Events") {
+      const deletedEvents = allEvents.filter((event) => event.isDeleted);
+      setEvents(deletedEvents);
+      setEventBtnDisplayed("Active Events");
+    } else {
+      const activeEvents = allEvents.filter((event) => !event.isDeleted);
+      setEvents(activeEvents);
+      setEventBtnDisplayed("Deleted Events");
     }
   };
 
@@ -154,13 +174,21 @@ const Events = () => {
     <div className="container-fluid p-5">
       <div className="d-flex justify-content-between">
         <h1 className="mb-4">Events</h1>
+        <div className="gap-2 d-flex flex-row align-items-end">
+          <button
+            className="btn main-btn mb-3 text-dark"
+            onClick={openCreateModal}
+          >
+            Create Event
+          </button>
 
-        <button
-          className="btn main-btn mb-3 text-dark"
-          onClick={openCreateModal}
-        >
-          Create Event
-        </button>
+          <button
+            className="btn main-btn mb-3 text-dark"
+            onClick={changeEvents}
+          >
+            {eventBtnDisplayed}
+          </button>
+        </div>
       </div>
       <EventContainer events={events} fetchEvents={fetchEvents} />;
       {showCreateModal && (
