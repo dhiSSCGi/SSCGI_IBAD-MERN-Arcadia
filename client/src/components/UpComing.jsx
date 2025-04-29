@@ -11,8 +11,7 @@ const UpComing = () => {
     try {
       const response = await customFetch.get("/event");
       const futureEvents = response.data.events.filter(
-        (event) =>
-          !event.isDeleted && new Date(event.registrationStart) > new Date()
+        (event) => !event.isDeleted && new Date(event.eventDate) > new Date()
       );
       setEvents(futureEvents);
     } catch (error) {
